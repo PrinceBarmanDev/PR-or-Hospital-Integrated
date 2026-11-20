@@ -1,0 +1,18 @@
+PR OR HOSPITAL — START HERE
+Gym Heavy Lifter & Muscle Readiness Detector
+
+1) Open this folder in VS Code.
+2) Open Terminal and run:
+   py -m venv .venv
+   .venv\Scripts\Activate.ps1
+   pip install -r requirements.txt
+3) Start the API:
+   uvicorn backend.main:app --reload
+4) Open frontend/index.html with VS Code Live Server.
+5) Use the assessment controls and click RUN MODEL ASSESSMENT.
+6) Run tests from the project root with: pytest -q
+
+IMPORTANT:
+The included trained models use historical powerlifting attempt data. They classify a historical attempt as failed (1) or successful (0). They do not predict injury, sleep/soreness readiness, medical risk, or safe lifting weights. Do not interpret a low failure probability as a guarantee that a lift is safe.
+
+If the model fails to load, install the dependencies from requirements.txt. The saved model was serialized with scikit-learn 1.9.1, so the requirements pin that version for compatibility.

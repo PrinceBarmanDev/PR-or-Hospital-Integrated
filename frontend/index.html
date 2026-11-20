@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PR OR HOSPITAL — Should You Lift This Weight?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{box-sizing:border-box}
+:root{--red:#ff3b30;--lime:#b8ff00;--bg:#070908;--card:#111512;--line:rgba(255,255,255,.09)}
+body{background:radial-gradient(900px 500px at 10% 0%,rgba(255,59,48,.18),transparent 60%),radial-gradient(800px 500px at 90% 20%,rgba(184,255,0,.12),transparent 60%),var(--bg)!important;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
+.grid-bg{pointer-events:none!important;opacity:.6}
+.app-shell{position:relative;z-index:1;max-width:1440px!important;width:100%!important;margin:0 auto!important;padding-left:1rem!important;padding-right:1rem!important;box-sizing:border-box!important}
+.input-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem!important;align-items:start}
+.result-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:1.2rem!important;margin-top:1.2rem}
+.gym-guide-section{margin:1.2rem 0}
+.gym-guide-heading{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin:0 0 1rem}
+.gym-guide-heading h2{font-family:Anton,sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1;margin:.35rem 0 0}
+.gym-guide-heading p{color:#aab8aa;font-size:.85rem;line-height:1.5;margin:.4rem 0 0;max-width:480px}
+.gym-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,auto);gap:1rem}
+.gym-card{position:relative;width:100%;min-width:0;background:#111;border:1px solid rgba(255,255,255,.16);border-radius:16px;overflow:hidden;box-shadow:0 14px 32px rgba(0,0,0,.4);opacity:1;cursor:pointer!important;transition:transform .2s,box-shadow .2s,border-color .2s}
+.gym-card:hover{opacity:1;box-shadow:0 18px 38px rgba(255,59,48,.22);border-color:var(--lime);transform:translateY(-4px)}
+.gym-card:active{transform:scale(.985)}
+.gym-card img{width:100%;height:155px;object-fit:cover;display:block;pointer-events:none}
+.gym-card span{display:block;padding:.75rem .8rem .35rem;text-align:left;font:800 .78rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:#ff6b63;background:#0c0e0c}
+.gym-card .card-description{padding:0 .8rem .75rem;text-align:left;font:500 .78rem Inter,sans-serif;letter-spacing:0;line-height:1.5;color:#aab8aa;background:#0c0e0c}
+.gym-card .click-hint{display:flex;align-items:center;gap:.45rem;padding:0 .8rem .8rem;text-align:left;font:700 .62rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:var(--lime);background:#0c0e0c;opacity:1}
+.gym-card .click-hint .ui-icon{margin:0;color:var(--lime)}
+.hero{border:1px solid var(--line);border-radius:24px!important;background:linear-gradient(135deg,rgba(255,59,48,.14),rgba(255,255,255,.03) 40%,rgba(184,255,0,.08));backdrop-filter:blur(12px);padding:2.2rem!important;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden;position:relative;display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:2rem!important}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,59,48,.35),transparent 70%);filter:blur(10px);pointer-events:none}
+.hero h1{font-size:clamp(3.2rem,8vw,6.2rem)!important;line-height:.85!important;letter-spacing:-.02em;text-shadow:0 10px 40px rgba(255,59,48,.35)}
+.hero h1 .lime{color:var(--lime)!important;text-shadow:0 10px 40px rgba(184,255,0,.35)}
+.hero-sub{font-size:1.05rem!important;color:#c8d0c8!important;max-width:560px;line-height:1.6}
+.hero-warning{display:inline-flex!important;gap:.5rem;align-items:center;background:linear-gradient(90deg,#b8ff00,#7dd300)!important;color:#000!important;padding:.6rem 1.1rem!important;border-radius:99px!important;font-weight:800!important;letter-spacing:.06em;box-shadow:0 10px 30px rgba(184,255,0,.35);white-space:nowrap}
+.hero-right{flex-shrink:0!important;flex-basis:190px!important;text-align:right!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;gap:.4rem!important}
+.session-date{font-size:2rem!important;color:var(--lime)!important;white-space:nowrap}
+.session-tag{background:rgba(184,255,0,.12)!important;border:1px solid rgba(184,255,0,.35)!important;color:var(--lime)!important;border-radius:99px!important;display:inline-flex!important;width:auto!important;white-space:nowrap}
+.how-to{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.04);padding:1.4rem 1.6rem;margin:1.2rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-to h3{margin:0 0 1rem;font-family:Anton,sans-serif;font-size:1.4rem;letter-spacing:.02em;grid-column:1/-1}
+.how-step{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.how-step b{display:block;color:var(--lime);font-size:.75rem;letter-spacing:.12em;margin-bottom:.35rem}
+.how-step p{margin:0;color:#c8d0c8;font-size:.9rem;line-height:1.5}
+.bento-grid{gap:1.2rem!important}
+.panel{border-radius:20px!important;border:1px solid var(--line)!important;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))!important;backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.45);overflow:hidden}
+.panel-header{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:1rem 1.2rem;flex-wrap:wrap}
+.panel-title{font-family:Anton,sans-serif;letter-spacing:.03em;display:flex;align-items:center;gap:.6rem}
+.panel-title .num{background:var(--red);color:#fff;width:34px;height:34px;display:inline-grid;place-items:center;border-radius:10px;font-size:.9rem;box-shadow:0 8px 20px rgba(255,59,48,.4)}
+.panel-sub{color:var(--lime)!important;font-weight:800!important}
+.signal-cell{background:rgba(0,0,0,.25)!important;border:1px solid var(--line)!important;border-radius:14px!important;transition:.2s;padding:.7rem .8rem}
+.signal-cell:hover{border-color:rgba(184,255,0,.5)!important;transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.4)}
+.signal-label{color:#aab8aa!important;font-weight:700!important;font-size:.72rem}
+.signal-label small{display:block;font-weight:400;font-size:.65rem;color:#788278;margin-top:2px;letter-spacing:0}
+.data-input{background:#0a0d0a!important;border:1px solid #2b332b!important;border-radius:10px!important;color:#fff!important;padding:.75rem .8rem!important;font-weight:600;width:100%}
+.data-input:focus{outline:none;border-color:var(--lime)!important;box-shadow:0 0 0 3px rgba(184,255,0,.15)}
+.data-input::placeholder,.target-number::placeholder{color:#5a665a!important;font-weight:500!important;font-size:.85rem!important;opacity:1}
+.target-number{background:#0a0d0a!important;border:1px solid #2b332b!important;border-radius:10px!important;color:#fff!important;padding:.75rem .8rem!important;font-weight:600;text-align:center}
+.target-number:focus{outline:none;border-color:var(--lime)!important;box-shadow:0 0 0 3px rgba(184,255,0,.15)}
+.recovery-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem;padding:0 1.2rem 1.2rem}
+.recovery-chip{flex:1;min-width:110px;background:linear-gradient(180deg,rgba(184,255,0,.12),rgba(0,0,0,.2));border:1px solid rgba(184,255,0,.25);padding:.7rem;border-radius:14px;text-align:center}
+.recovery-chip b{display:block;font:800 1.25rem 'JetBrains Mono',monospace;color:var(--lime)}
+.recovery-chip span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#8a968a}
+.weight-stepper{justify-content:center}
+.target-weight{font-size:3.2rem!important}
+.target-weight small{color:var(--lime)}
+.step-btn{width:52px!important;height:52px!important;border-radius:50%!important;background:var(--red)!important;color:#fff!important;font-size:1.6rem!important;box-shadow:0 10px 25px rgba(255,59,48,.4);transition:.2s;border:none;cursor:pointer}
+.step-btn:hover{transform:scale(1.1)}
+.lime-slider{accent-color:var(--lime);width:100%}
+.run-button{width:100%;padding:1.2rem!important;border-radius:16px!important;background:linear-gradient(90deg,#ff3b30,#ff6b35,#ff3b30)!important;background-size:200% 100%!important;color:#fff!important;font-size:1.05rem!important;font-weight:900!important;letter-spacing:.1em;box-shadow:0 15px 35px rgba(255,59,48,.5),inset 0 1px 0 rgba(255,255,255,.35)!important;transition:.25s;border:none;cursor:pointer;display:flex!important;align-items:center!important;justify-content:center!important;gap:.7rem!important;margin-top:1rem!important}
+.run-button:hover{transform:translateY(-2px)!important;box-shadow:0 22px 45px rgba(255,59,48,.65)!important;background-position:100% 0!important}
+.gauge-wrap{position:relative!important;width:180px!important;height:180px!important;margin:.5rem auto 1rem!important;filter:drop-shadow(0 0 25px rgba(184,255,0,.25))!important;flex-shrink:0!important}
+.radial-gauge{width:180px!important;height:180px!important;display:block!important;transform:rotate(-90deg)!important}
+.gauge-track{fill:none!important;stroke:#232a23!important;stroke-width:14!important}
+.gauge-arc{fill:none!important;stroke:#b8ff00!important;stroke-width:14!important;stroke-linecap:round!important;stroke-dasharray:515.22!important;stroke-dashoffset:515.22!important;transition:stroke .3s!important}
+.gauge-center{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+.prob-num{font-size:2.8rem!important;line-height:1!important;font-family:'JetBrains Mono',monospace!important;font-weight:800!important}
+.prob-num small{font-size:1rem!important;color:#8a968a!important}
+.prob-label{font:700 .55rem 'JetBrains Mono',monospace!important;letter-spacing:.14em!important;color:#8a968a!important;margin-top:.2rem!important}
+.verdict-block{text-align:center!important;margin-bottom:1rem!important}
+.verdict-eyebrow{font:700 .6rem 'JetBrains Mono',monospace!important;letter-spacing:.14em!important;color:#b8ff00!important}
+.verdict-title{font-size:2.1rem!important;font-family:Anton,sans-serif!important;line-height:1!important;margin:.4rem 0!important}
+.verdict-title.safe{color:#b8ff00!important}.verdict-title.danger{color:#ff3b30!important}.verdict-title.warn{color:#eab308!important}
+.verdict-sub{font-size:.85rem!important;color:#c8d0c8!important}
+.advice-box{background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.3);border-radius:14px;padding:.9rem 1rem;margin-top:1rem;font-size:.9rem;line-height:1.5;color:#d8e0d8}
+.advice-box b{color:var(--lime)}
+.data-card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;border:1px solid var(--line)!important;border-radius:16px!important;transition:.2s;padding:1.15rem;min-height:130px;display:flex;flex-direction:column;justify-content:space-between;gap:.55rem}
+.data-card:hover{transform:translateY(-4px);border-color:rgba(184,255,0,.4)}
+.data-card strong{font-size:2rem!important;color:#fff;display:block;line-height:1.1}
+.data-card span{font-size:.68rem;letter-spacing:.12em}
+.data-card small{color:#aab8aa;font-size:.78rem;line-height:1.45}
+.site-footer{border-top:1px solid var(--line);opacity:.8;padding:1rem;text-align:center;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.popup-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem}
+.popup-overlay.show{display:flex;animation:popIn .25s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.popup-box{position:relative;width:100%;max-width:420px;background:linear-gradient(180deg,#1a201a,#111411);border:2px solid #ff3b30;padding:2rem 1.5rem 1.5rem;text-align:center;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.popup-close{position:absolute!important;top:12px!important;right:12px!important;width:42px!important;height:42px!important;display:grid!important;place-items:center!important;background:rgba(0,0,0,.8)!important;border:2px solid #fff!important;border-radius:50%!important;color:#fff!important;font-size:1.2rem!important;cursor:pointer!important;z-index:10!important}
+.popup-close:hover{background:#ff3b30!important;border-color:#ff3b30!important;transform:scale(1.1)!important}
+.popup-eyebrow{font:700 .65rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#788278}
+.popup-title{font-family:'Anton',sans-serif;font-size:2.6rem;margin:.5rem 0;color:#ff3b30;line-height:1}
+.popup-prob{font:700 2.2rem 'JetBrains Mono',monospace}.popup-prob small{font-size:.8rem;color:#788278}
+.popup-sub{color:#aab8aa;font-size:.9rem;margin:1rem 0;line-height:1.5}
+.popup-btn{width:100%;padding:1rem;border:0;border-radius:12px;background:#ff3b30;color:#fff;font:800 .8rem 'JetBrains Mono',monospace;letter-spacing:.08em;cursor:pointer}
+.big-popup-box{max-width:720px!important;max-height:92vh;overflow-y:auto;text-align:left!important;padding:0!important;border-color:var(--lime)!important}
+.big-popup-box::-webkit-scrollbar{width:6px}.big-popup-box::-webkit-scrollbar-thumb{background:#ff3b30;border-radius:99px}
+.big-popup-hero{position:relative}
+.big-popup-hero img{width:100%;height:260px;object-fit:cover;display:block;border-radius:18px 18px 0 0}
+.big-popup-hero .hero-tag{position:absolute;left:16px;bottom:16px;background:#ff3b30;color:#fff;padding:.4rem .9rem;border-radius:99px;font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em}
+.big-popup-content{padding:1.6rem 1.8rem 1.6rem}
+.big-popup-content h2{font-family:Anton,sans-serif;font-size:2.6rem;line-height:.95;margin:.2rem 0 .8rem;color:#fff}
+.big-popup-content h2 span{color:var(--lime)}
+.big-popup-intro{color:#c8d0c8;line-height:1.6;font-size:.95rem;margin:0 0 1.2rem}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem}
+.info-card{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.info-card.full{grid-column:1/-1}
+.info-card h4{margin:0 0 .4rem;font-size:.7rem;letter-spacing:.14em;color:var(--lime);font-family:'JetBrains Mono',monospace}
+.info-card p,.info-card li{margin:0;color:#d8e0d8;font-size:.88rem;line-height:1.6}
+.info-card ul{margin:0;padding-left:1.1rem}
+.info-card li{margin-bottom:.25rem}
+.info-card.red{border-color:rgba(255,59,48,.4);background:rgba(255,59,48,.08)}
+.info-card.red h4{color:#ff6b63}
+.info-card.lime{border-color:rgba(184,255,0,.35);background:rgba(184,255,0,.07)}
+.mini-stats{display:flex;gap:.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.mini-stat{flex:1;min-width:100px;background:#0a0d0a;border:1px solid var(--line);border-radius:12px;padding:.6rem;text-align:center}
+.mini-stat b{display:block;font:800 1.1rem 'JetBrains Mono',monospace;color:var(--lime)}
+.mini-stat span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a}
+.plate-guide{margin:1rem 0 0;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.plate-guide h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.plate-legend{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;margin-bottom:.7rem}
+.plate-item{display:flex;align-items:center;gap:.5rem;font:600 .75rem Inter,sans-serif;color:#d8e0d8}
+.plate-dot{width:18px;height:18px;border-radius:4px;flex-shrink:0;display:grid;place-items:center;font:800 .55rem 'JetBrains Mono',monospace;color:#fff;border:1px solid rgba(0,0,0,.4)}
+.plate-dot.red{background:#ff3b30}.plate-dot.blue{background:#2563eb}.plate-dot.yellow{background:#eab308;color:#000}.plate-dot.green{background:#16a34a}.plate-dot.white{background:#fff;color:#000}.plate-dot.purple{background:#a855f7}
+.plate-info{border-top:1px solid var(--line);padding-top:.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;text-align:center}
+.plate-info div b{display:block;font:800 .9rem 'JetBrains Mono',monospace;color:#fff}
+.plate-info div span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a}
+.plate-tip{margin:.6rem 0 0;font-size:.75rem;line-height:1.5;color:#aab8aa;background:rgba(184,255,0,.07);border:1px solid rgba(184,255,0,.2);border-radius:10px;padding:.55rem .7rem}
+.plate-tip b{color:var(--lime)}
+.diag-inputs{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
+.diag-inputs h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.diag-grid div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .5rem;text-align:center}
+.diag-grid div span{display:block;font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#8a968a;margin-bottom:.2rem}
+.diag-grid div b{font:800 .9rem 'JetBrains Mono',monospace;color:#fff}
+.lift-card{border:1px solid var(--line);border-radius:16px;padding:1rem;background:rgba(0,0,0,.15)}
+.lift-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.lift-card-top span:first-child{font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8a968a}
+.lift-badge{font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.08em;padding:.3rem .7rem;border-radius:99px;background:#333;color:#fff}
+.lift-badge.high{background:#ff3b30}.lift-badge.medium{background:#eab308;color:#000}.lift-badge.low{background:#b8ff00;color:#000}
+.lift-badge.pending{background:rgba(255,255,255,.08);color:#d7ded7;border:1px solid rgba(255,255,255,.14)}
+.result-outputs{margin-top:1rem;display:flex;flex-direction:column;gap:.45rem}
+.out-row{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
+.out-row span{color:#c8d0c8}.out-row b{font:800 .9rem 'JetBrains Mono',monospace;color:var(--lime)}
+.out-row.highlight{border-color:rgba(184,255,0,.4);background:rgba(184,255,0,.08)}
+.risk-explain{margin-top:1rem;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem}
+.risk-explain h4{margin:0 0 .5rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--lime)}
+.risk-explain ul{margin:0;padding-left:1.1rem;color:#d8e0d8;font-size:.82rem;line-height:1.6}
+.recovery-warning{margin-top:1rem;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.4);border-radius:12px;padding:.8rem 1rem}
+.recovery-warning b{color:#ff6b63;font:800 .7rem 'JetBrains Mono',monospace;letter-spacing:.1em}
+.recovery-warning p{margin:.4rem 0 0;font-size:.82rem;line-height:1.5;color:#ffd6d3}
+.result-guide{margin:1rem 0 0;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.result-guide h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.result-zones{display:grid;grid-template-columns:1fr;gap:.45rem;margin-bottom:.7rem}
+.zone{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:10px;font-size:.78rem;line-height:1.4}
+.zone b{flex-shrink:0;font:800 .6rem 'JetBrains Mono',monospace;letter-spacing:.08em;padding:.25rem .5rem;border-radius:99px;color:#000;min-width:78px;text-align:center}
+.zone.green{background:rgba(184,255,0,.1);border:1px solid rgba(184,255,0,.3);color:#d8e0d8}.zone.green b{background:var(--lime)}
+.zone.yellow{background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.35);color:#d8e0d8}.zone.yellow b{background:#eab308}
+.zone.red{background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.35);color:#d8e0d8}.zone.red b{background:#ff3b30;color:#fff}
+.result-tip{margin:.6rem 0 0;font-size:.75rem;line-height:1.5;color:#aab8aa;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem}
+.result-tip b{color:#fff}
+.result-next{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.6rem;text-align:center}
+.result-next div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .3rem}
+.result-next div b{display:block;font:800 .85rem 'JetBrains Mono',monospace;color:var(--lime)}
+.result-next div span{font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#8a968a}
+.big-result-box{max-width:580px!important;max-height:92vh;overflow-y:auto;text-align:center!important;padding:1.8rem 1.6rem 1.4rem!important}
+.big-result-title{font-family:'Anton',sans-serif;font-size:2.8rem;line-height:1;margin:.5rem 0 .4rem}
+.popup-badge-row{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-bottom:1rem}
+.popup-date{font:700 .6rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#788278}
+.big-result-gauge{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem}
+.big-gauge-num{font:800 3.2rem 'JetBrains Mono',monospace;line-height:1}
+.big-gauge-num small{font-size:.9rem;color:#788278}
+.big-gauge-bar{height:12px;background:#232a23;border-radius:99px;overflow:hidden;margin:.8rem 0 .6rem}
+.big-gauge-bar div{height:100%;border-radius:99px;background:var(--lime);transition:width .6s}
+.big-gauge-split{display:flex;justify-content:space-between;font:700 .65rem 'JetBrains Mono',monospace;letter-spacing:.06em;color:#788278}
+.big-gauge-split b{color:#fff}
+.popup-outputs{margin:1rem 0;display:flex;flex-direction:column;gap:.45rem;text-align:left}
+.p-out{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.65rem .8rem;font-size:.85rem}
+.p-out span{color:#c8d0c8}.p-out b{font:800 .95rem 'JetBrains Mono',monospace;color:var(--lime)}
+.p-out.highlight{border-color:rgba(184,255,0,.45);background:rgba(184,255,0,.08)}
+.popup-inputs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem;margin-bottom:1rem}
+.popup-inputs div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .3rem}
+.popup-inputs div span{display:block;font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#788278;margin-bottom:.2rem}
+.popup-inputs div b{font:800 .85rem 'JetBrains Mono',monospace;color:#fff}
+.popup-why{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;text-align:left;margin-bottom:.8rem}
+.popup-why h4{margin:0 0 .4rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--lime)}
+.popup-why ul{margin:0;padding-left:1.1rem;color:#d8e0d8;font-size:.82rem;line-height:1.6}
+.big-result-advice{background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.3);border-radius:12px;padding:.8rem 1rem;font-size:.88rem;line-height:1.5;color:#d8e0d8;margin-bottom:1rem}
+.ui-icon{display:inline-block;margin-right:7px;color:var(--lime);font-size:.95em;vertical-align:middle}
+button .ui-icon{color:inherit}
+.eyebrow{font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#b8ff00;display:flex;align-items:center;gap:.6rem}
+.eyebrow-line{width:40px;height:1px;background:#b8ff00;display:inline-block}
+.meta-label{font:700 .6rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#788278}
+.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1rem}
+.section-heading h2{font-family:Anton,sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1;margin:.35rem 0 0}
+.section-note{font:700 .6rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#788278;border:1px solid var(--line);padding:.4rem .7rem;border-radius:99px;white-space:nowrap}
+.data-section{margin:1.2rem 0}
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.panel-footnote{margin-top:1rem;font-size:.8rem;color:#8a968a;line-height:1.5}
+.signals-grid{padding:1.2rem;display:grid;gap:.7rem}
+.about-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:.7rem!important;align-items:start!important}
+.about-grid .signal-cell{display:flex!important;flex-direction:column!important;gap:.45rem!important;min-height:86px!important}
+.about-grid .signal-cell.full{grid-column:1/-1!important;min-height:auto!important}
+#check-date{color-scheme:dark}
+#check-date::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer}
+/* === BARBELL - CORRECTED - ONLY VERSION - BIG NEAR BAR, SMALL OUTSIDE === */
+.barbell-wrap{background:#0a0d0a!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:14px!important;padding:1.1rem .8rem .8rem!important;margin:1rem 1.2rem 0!important;overflow:hidden!important}
+.barbell-visual{display:flex!important;align-items:center!important;justify-content:center!important;min-height:92px!important;height:92px!important;gap:0!important;width:100%!important}
+.barbell-side{display:flex!important;align-items:center!important;gap:3px!important;height:92px!important;flex:1 1 0!important;min-width:0!important}
+#left-plates{justify-content:flex-end!important;flex-direction:row!important}
+#right-plates{justify-content:flex-start!important;flex-direction:row!important}
+.barbell-bar{width:100px!important;height:10px!important;background:linear-gradient(180deg,#eee,#888)!important;border-radius:0!important;flex:0 0 100px!important;flex-shrink:0!important;position:relative!important;z-index:2!important}
+.plate{width:14px!important;border-radius:4px!important;display:grid!important;place-items:center!important;font:800 .6rem 'JetBrains Mono',monospace!important;color:#fff!important;flex:0 0 14px!important;box-shadow:inset 0 0 0 2px rgba(0,0,0,.3)!important;border:0!important}
+.plate-25{height:88px!important;background:#ff3b30!important}
+.plate-20{height:78px!important;background:#2563eb!important}
+.plate-15{height:68px!important;background:#eab308!important;color:#000!important}
+.plate-10{height:58px!important;background:#16a34a!important}
+.plate-5{height:48px!important;background:#fff!important;color:#000!important}
+.plate-2_5{height:40px!important;background:#a855f7!important}
+.plate-1_25{height:32px!important;background:#64748b!important}
+.barbell-count{text-align:center!important;font:700 .6rem 'JetBrains Mono',monospace!important;letter-spacing:.12em!important;color:#8a968a!important;margin-top:.3rem!important}
+.target-row{display:flex!important;gap:.7rem!important;align-items:center!important;margin-top:.8rem!important}
+.target-row .lime-slider{flex:1!important}
+.target-row .target-number{width:92px!important;flex-shrink:0!important}
+.target-hint{font-size:.75rem!important;color:#8a968a!important;margin:.4rem 0 0!important}
+.bar-footer{display:flex!important;justify-content:space-between!important;gap:.5rem!important;font:700 .6rem 'JetBrains Mono',monospace!important;letter-spacing:.08em!important;color:#8a968a!important;margin:.7rem 0 0!important}
+#card-popup{padding:.5rem!important;align-items:center!important;justify-content:center!important}
+#card-popup .big-popup-box{max-width:700px!important;width:96vw!important;max-height:96vh!important;overflow-y:auto!important;overflow-x:hidden!important;display:block!important;border-radius:16px!important}
+#card-popup .big-popup-content{padding:.75rem 1rem .8rem!important;display:flex!important;flex-direction:column!important;gap:.5rem!important}
+#card-popup .big-popup-content h2{font-size:1.75rem!important;margin:0!important;line-height:1!important}
+#card-popup .big-popup-intro{font-size:.78rem!important;line-height:1.4!important;margin:0!important}
+#card-popup .mini-stats{margin:0!important;gap:.4rem!important}
+#card-popup .mini-stat{padding:.35rem .2rem!important}
+#card-popup .mini-stat b{font-size:.85rem!important}
+#card-popup .mini-stat span{font-size:.48rem!important}
+#card-popup .info-grid{gap:.45rem!important;margin:0!important;display:grid!important;grid-template-columns:1fr 1fr!important}
+#card-popup .info-card{padding:.5rem .6rem!important}
+#card-popup .info-card h4{font-size:.58rem!important;margin-bottom:.2rem!important}
+#card-popup .info-card li,#card-popup .info-card p{font-size:.73rem!important;line-height:1.35!important}
+#card-popup .info-card ul{padding-left:.9rem!important;margin:0!important}
+#card-popup .popup-btn{padding:.65rem!important;font-size:.7rem!important;margin-top:.1rem!important}
+#card-popup-close{top:8px!important;right:8px!important;width:36px!important;height:36px!important}
+.card-nav{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:.6rem!important;margin-top:.6rem!important}
+.card-nav-btn{flex:1!important;padding:.7rem .5rem!important;border:1px solid rgba(255,255,255,.2)!important;background:rgba(255,255,255,.06)!important;color:#fff!important;border-radius:10px!important;font:800 .68rem 'JetBrains Mono',monospace!important;letter-spacing:.08em!important;cursor:pointer!important}
+.card-nav-btn.next{background:#ff3b30!important;border-color:#ff3b30!important}
+.card-counter{font:800 .68rem 'JetBrains Mono',monospace!important;color:#b8ff00!important;white-space:nowrap!important}
+.card-dots{display:flex!important;justify-content:center!important;gap:.35rem!important;margin-top:.5rem!important}
+.card-dot{width:7px!important;height:7px!important;border-radius:99px!important;background:#333!important;cursor:pointer!important;transition:.2s!important}
+.card-dot.active{width:22px!important;background:#b8ff00!important}
+#card-popup .big-popup-box{touch-action:pan-y!important}
+.slide-in-left{animation:slideL .28s ease}
+.slide-in-right{animation:slideR .28s ease}
+@keyframes slideL{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideR{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+.swipe-hint{text-align:center!important;font:700 .58rem 'JetBrains Mono',monospace!important;letter-spacing:.1em!important;color:#788278!important;margin-top:.3rem!important}
+.how-works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.how-works-card{background:linear-gradient(180deg,rgba(184,255,0,.08),rgba(0,0,0,.2));border:1px solid rgba(184,255,0,.25);border-radius:16px;padding:1.2rem;text-align:center;position:relative;overflow:hidden}
+.how-works-card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--lime)}
+.how-works-card:nth-child(2):before{background:#ff3b30}.how-works-card:nth-child(3):before{background:#eab308}
+.how-works-card h4{font-family:Anton,sans-serif;font-size:1.2rem;margin:.5rem 0}
+.how-works-card p{color:#aab8aa;font-size:.85rem;line-height:1.5;margin:0}
+.how-icon{width:56px!important;height:56px!important;margin:0 auto!important;display:grid!important;place-items:center!important;background:rgba(184,255,0,.12)!important;border:1px solid rgba(184,255,0,.35)!important;border-radius:50%!important;color:#b8ff00!important;font-size:1.4rem!important}
+.how-works-card:nth-child(2) .how-icon{color:#ff3b30!important;background:rgba(255,59,48,.12)!important;border-color:rgba(255,59,48,.4)!important}
+.how-works-card:nth-child(3) .how-icon{color:#eab308!important;background:rgba(234,179,8,.12)!important;border-color:rgba(234,179,8,.4)!important}
+.history-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:1rem}
+.history-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:16px;padding:1.1rem}
+.history-card h4{margin:0 0 .8rem;font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--lime)}
+.history-card.small{display:flex;flex-direction:column;justify-content:center}
+.history-legend{display:flex;gap:1.2rem;flex-wrap:wrap;font:700 .6rem 'JetBrains Mono',monospace;color:#8a968a;margin-top:.6rem}
+.history-best{margin-bottom:.6rem}.history-best b{display:block;font:800 1.6rem 'JetBrains Mono',monospace;color:#fff}.history-best span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a}
+.history-table-wrap{overflow-x:auto;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:16px}
+.history-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:680px}
+.history-table th{font:800 .6rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a;text-align:left;padding:.8rem;border-bottom:1px solid var(--line);white-space:nowrap}
+.history-table td{padding:.7rem .8rem;border-bottom:1px solid rgba(255,255,255,.05);color:#d8e0d8;white-space:nowrap}
+button{touch-action:manipulation}
+@media(max-width:1000px){.input-grid{grid-template-columns:1fr!important}.data-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.how-to{grid-template-columns:1fr}.how-works-grid{grid-template-columns:1fr}}
+@media(max-width:800px){.history-grid{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .gym-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+  .gym-card img{height:115px}
+  .big-popup-box{max-width:95vw!important}.info-grid{grid-template-columns:1fr}.big-popup-hero img{height:180px}.big-popup-content{padding:1.2rem}.big-popup-content h2{font-size:2rem}
+  .diag-grid{grid-template-columns:1fr 1fr}.popup-inputs{grid-template-columns:1fr 1fr}.hero{padding:1.4rem!important}.gym-guide-heading{display:block}.data-grid{grid-template-columns:1fr 1fr}
+  .barbell-bar{width:54px!important;flex-basis:54px!important}.barbell-side{gap:2px!important}.plate{width:10px!important;flex-basis:10px!important;font-size:.48rem!important}
+  #card-popup .info-grid{grid-template-columns:1fr!important}
+  .how-works-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){.about-grid{grid-template-columns:1fr!important}.about-grid .signal-cell.full{grid-column:1!important}}
+@media(max-width:680px){.hero{flex-direction:column!important;gap:1.2rem!important}.hero-right{align-items:flex-start!important;text-align:left!important;flex-basis:auto!important;width:100%!important}.hero-warning{white-space:normal!important;text-align:center!important;width:100%!important;justify-content:center!important}}
+@media(max-width:420px){.gym-guide-grid{grid-template-columns:1fr}.gym-card img{height:165px}.plate-legend{grid-template-columns:1fr}.plate-info{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="app-shell">
+<header class="hero">
+  <div class="hero-left">
+    <div class="eyebrow"><span>PR / HOSPITAL · SHOULD YOU LIFT THIS?</span><span class="eyebrow-line"></span></div>
+    <h1>PR OR<br><span class="lime">HOSPITAL.</span></h1>
+    <p class="hero-sub">Enter your body details, your previous best lift, and how your body feels today. We tell you your lift score and your winning weight for today - so you lift smart and feel like a beast.</p>
+    <div class="hero-warning"><i class="fa-solid fa-bolt" aria-hidden="true"></i> SMART LIFT CHECK • KNOW BEFORE YOU LIFT</div>
+  </div>
+  <div class="hero-right">
+    <span class="meta-label">TODAY</span>
+    <div class="session-date" id="session-date">—</div>
+    <div class="session-tag" id="api-status-tag">READY</div>
+  </div>
+</header>
+<div class="how-to">
+  <h3>HOW TO USE THIS TOOL</h3>
+  <div class="how-step"><b>STEP 1 — ABOUT YOU</b><p>Enter your name, date, age, body weight, exercise, previous best lift, sleep, soreness, rest days and how fresh you feel. Use honest answers.</p></div>
+  <div class="how-step"><b>STEP 2 — SET YOUR TARGET</b><p>Use the plus/minus buttons or slider to choose the weight you want to attempt today.</p></div>
+  <div class="how-step"><b>STEP 3 — SEE YOUR SCORE</b><p>Select Check My Lift. See your lift score, your zone and your winning weight for today.</p></div>
+</div>
+<main>
+  <section class="bento-grid input-grid">
+    <section class="panel panel-inputs">
+      <div class="panel-header"><div class="panel-title"><span class="num">01</span> ABOUT YOU</div><span class="panel-sub">YOUR BODY TODAY</span></div>
+      <input type="hidden" id="event" value="SBD">
+      <div class="signals-grid about-grid">
+        <label class="signal-cell full"><span class="signal-label">YOUR NAME <small>Who is lifting today?</small></span><input class="data-input" id="user-name" type="text" placeholder="Enter your full name" autocomplete="name"></label>
+        <label class="signal-cell full"><span class="signal-label"><i class="fa-solid fa-calendar-day ui-icon"></i>DATE OF CHECK <small>Today's check date - compare with your last check</small></span><input class="data-input" id="check-date" type="date"></label>
+        <label class="signal-cell"><span class="signal-label">AGE <small>How old are you?</small></span><input class="data-input" id="age" type="number" min="10" max="100" placeholder="e.g. 22" required></label>
+        <label class="signal-cell"><span class="signal-label">BODY WEIGHT <small>Your weight in kg</small></span><input class="data-input" id="bodyweight" type="number" min="20" max="300" step="0.1" placeholder="e.g. 80" required></label>
+        <label class="signal-cell"><span class="signal-label">GENDER <small>Select your profile</small></span><select class="data-input" id="sex"><option value="M">Male</option><option value="F">Female</option><option value="X">Prefer not to say</option></select></label>
+        <label class="signal-cell"><span class="signal-label">EQUIPMENT <small>What are you using?</small></span><select class="data-input" id="equipment"><option value="Raw">Raw - No wraps</option><option value="Wraps">Wraps</option><option value="Single-ply">Single-ply suit</option><option value="Multi-ply">Multi-ply suit</option><option value="Straps">Straps</option></select></label>
+        <label class="signal-cell"><span class="signal-label">SELECT YOUR EXERCISE <small>Which lift today?</small></span><select class="data-input" id="lift-type"><option value="squat">Squat</option><option value="bench">Bench Press</option><option value="deadlift">Deadlift</option></select></label>
+        <label class="signal-cell"><span class="signal-label">ATTEMPT NUMBER <small>Which attempt?</small></span><select class="data-input" id="attempt-number"><option value="1">Attempt 1 - Opener</option><option value="2" selected>Attempt 2 - Second</option><option value="3">Attempt 3 - Final / PR</option></select></label>
+        <label class="signal-cell full"><span class="signal-label">PREVIOUS BEST LIFT <small>Heaviest you lifted successfully before (kg)</small></span><input class="data-input" id="prior-success" type="number" min="0" max="1000" step="0.5" placeholder="e.g. 100" required></label>
+        <label class="signal-cell"><span class="signal-label"><i class="fa-solid fa-moon ui-icon"></i>SLEEP <small>Hours slept last night</small></span><input class="data-input" id="sleep-hours" type="number" min="0" max="14" step="0.5" placeholder="e.g. 7"></label>
+        <label class="signal-cell"><span class="signal-label"><i class="fa-solid fa-dumbbell ui-icon"></i>MUSCLE SORENESS <small>1 = Fresh, 10 = Very sore</small></span><input class="data-input" id="soreness" type="number" min="1" max="10" step="1" placeholder="1 to 10"></label>
+        <label class="signal-cell"><span class="signal-label"><i class="fa-solid fa-calendar-check ui-icon"></i>REST DAYS <small>Days since last heavy session</small></span><input class="data-input" id="rest-days" type="number" min="0" max="14" step="1" placeholder="e.g. 2"></label>
+        <label class="signal-cell"><span class="signal-label"><i class="fa-solid fa-battery-three-quarters ui-icon"></i>HOW FRESH DO YOU FEEL? <small>1 = Exhausted, 10 = Super fresh</small></span><input class="data-input" id="energy" type="number" min="1" max="10" step="1" placeholder="1 to 10"></label>
+      </div>
+      <div class="recovery-row">
+        <div class="recovery-chip"><b id="recovery-score">—</b><span>YOUR POWER SCORE</span></div>
+        <div class="recovery-chip"><b id="recovery-verdict">—</b><span>YOUR ZONE</span></div>
+        <div class="recovery-chip"><b id="recovery-risk">—</b><span>ENERGY LEFT</span></div>
+      </div>
+    </section>
+    <section class="panel panel-bar">
+      <div class="panel-header"><div class="panel-title"><span class="num">02</span> LOAD THE BAR</div><span class="panel-sub">YOUR TARGET WEIGHT</span></div>
+      <div class="bar-controls-top" style="padding:1.2rem 1.2rem 0">
+        <span class="target-eyebrow" style="font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8a968a">SET YOUR TARGET WEIGHT · KG</span>
+        <div class="weight-stepper" style="display:flex;align-items:center;justify-content:center;gap:1rem;margin:.8rem 0"><button type="button" class="step-btn" id="dec-weight" aria-label="Decrease target weight">−</button><div class="target-weight"><span id="target-weight-val">100</span><small>KG</small></div><button type="button" class="step-btn" id="inc-weight" aria-label="Increase target weight">+</button></div>
+        <div class="target-row"><input type="range" id="weight-slider" class="lime-slider full-slider" min="20" max="1000" step="2.5" value="100" aria-label="Target weight slider" /><input type="number" id="target-weight" class="target-number" min="20" max="1000" step="2.5" value="100" placeholder="100"></div>
+        <p class="target-hint">Or enter your target weight (kg)</p>
+        <label class="signal-label" style="display:block;margin-top:1rem">ENTER YOUR PREVIOUS BEST · KG</label>
+        <p class="target-hint" id="intensity-pct" style="margin-top:.3rem">ENTER YOUR LAST BEST</p>
+      </div>
+      <div class="barbell-wrap">
+        <div class="barbell-visual">
+          <div class="barbell-side" id="left-plates"></div>
+          <div class="barbell-bar"></div>
+          <div class="barbell-side right" id="right-plates"></div>
+        </div>
+        <div class="barbell-count" id="plate-breakdown">1x25 + 1x15 KG / SIDE</div>
+      </div>
+      <div class="bar-footer" style="padding:0 1.2rem"><span>LIVE BAR LOADER · KG</span><span id="plate-per-side-label">PER SIDE: <b id="plate-per-side" style="color:#b8ff00">40.0 KG</b></span></div>
+      <div class="plate-guide" style="margin:1rem 1.2rem 0">
+        <h4><i class="fa-solid fa-dumbbell ui-icon" aria-hidden="true"></i>YOUR BARBELL - WHAT'S ON THE BAR?</h4>
+        <div class="plate-legend">
+          <div class="plate-item"><span class="plate-dot red">25</span> Red plate = 25 kg</div>
+          <div class="plate-item"><span class="plate-dot blue">20</span> Blue plate = 20 kg</div>
+          <div class="plate-item"><span class="plate-dot yellow">15</span> Yellow plate = 15 kg</div>
+          <div class="plate-item"><span class="plate-dot green">10</span> Green plate = 10 kg</div>
+          <div class="plate-item"><span class="plate-dot white">5</span> White plate = 5 kg</div>
+          <div class="plate-item"><span class="plate-dot purple">2.5</span> Purple plate = 2.5 kg</div>
+        </div>
+        <div class="plate-info">
+          <div><b>20 KG</b><span>BAR WEIGHT</span></div>
+          <div><b id="plate-guide-per-side">40.0 KG</b><span>PER SIDE</span></div>
+          <div><b>2.5 KG</b><span>COLLARS</span></div>
+        </div>
+        <p class="plate-tip"><b>How to load:</b> Heaviest plates first (inside, next to bar), lightest last (outside). Always put collars on. Example: For 100 kg, a 20 kg bar + 40 kg per side = 100 kg.</p>
+        <p class="plate-tip" style="background:rgba(255,59,48,.08);border-color:rgba(255,59,48,.25)"><b><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Safety:</b> Load both sides equally. Never load one side only. Use a qualified spotter and safety bars for heavy attempts.</p>
+      </div>
+      <div style="padding:0 1.2rem 1.2rem">
+        <button type="button" class="run-button" id="run-prediction"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> CHECK MY LIFT <span>→</span></button>
+      </div>
+    </section>
+  </section>
+  <section class="gym-guide-section">
+    <div class="gym-guide-heading">
+      <div><div class="eyebrow">GYM GUIDE / LEARN BEFORE YOU LIFT</div><h2>TRAIN SMARTER.</h2><p>Explore these six quick guides for training, recovery and lifting technique. Select a card to read the full guide.</p></div>
+      <span class="section-note">6 QUICK GUIDES</span>
+    </div>
+    <div class="gym-guide-grid">
+      <article class="gym-card" data-card="heavy" tabindex="0" role="button" aria-label="Open Heavy Lift guide"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Gym strength training"><span>HEAVY LIFT</span><div class="card-description">Understand high-intensity lifting and when to avoid a maximum attempt.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+      <article class="gym-card" data-card="noexcuses" tabindex="0" role="button" aria-label="Open No Excuses guide"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Athlete training in gym"><span>NO EXCUSES</span><div class="card-description">Build consistency while knowing when rest is the smarter choice.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+      <article class="gym-card" data-card="prmode" tabindex="0" role="button" aria-label="Open PR Mode guide"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Strength training session"><span>PR MODE</span><div class="card-description">Plan a personal-record attempt with sensible weight increases.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+      <article class="gym-card" data-card="beast" tabindex="0" role="button" aria-label="Open Beast Mode guide"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Athlete doing a workout"><span>BEAST MODE</span><div class="card-description">Learn how sleep, energy, food and recovery affect training quality.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+      <article class="gym-card" data-card="deadlift" tabindex="0" role="button" aria-label="Open Deadlift guide"><img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80" alt="Deadlift training"><span>DEADLIFT</span><div class="card-description">Review the basic deadlift setup, technique and warning signs.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+      <article class="gym-card" data-card="squat" tabindex="0" role="button" aria-label="Open Squat guide"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=80" alt="Squat rack and barbell"><span>SQUAT</span><div class="card-description">Learn squat setup, controlled movement and safe rack use.</div><div class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> OPEN GUIDE</div></article>
+    </div>
+  </section>
+  <section class="bento-grid result-grid">
+    <section class="panel panel-diagnostic">
+      <div class="panel-header"><div class="panel-title"><span class="num">03</span> YOUR RESULT</div><span class="panel-sub">YOUR LIFT SCORE</span></div>
+      <div class="diag-inputs">
+        <h4><i class="fa-solid fa-clipboard-list ui-icon" aria-hidden="true"></i>YOUR CHECK TODAY</h4>
+        <div class="diag-grid">
+          <div><span>SLEEP</span><b id="d-sleep">—</b></div>
+          <div><span>SORENESS</span><b id="d-sore">—</b></div>
+          <div><span>REST DAYS</span><b id="d-rest">—</b></div>
+          <div><span>TARGET WEIGHT</span><b id="d-target">—</b></div>
+          <div><span>PREVIOUS BEST</span><b id="d-pr">—</b></div>
+          <div><span>POWER SCORE</span><b id="d-ready">—</b></div>
+        </div>
+      </div>
+      <div class="lift-card" id="lift-card" data-result-state="empty" aria-live="polite">
+        <div class="lift-card-top"><span>YOUR LIFT SCORE</span><span class="lift-badge pending" id="lift-badge">AWAITING DETAILS</span></div>
+        <div class="gauge-wrap"><svg class="radial-gauge" viewBox="0 0 200 200"><circle class="gauge-track" cx="100" cy="100" r="82"/><circle class="gauge-arc" id="gauge-arc" cx="100" cy="100" r="82"/></svg><div class="gauge-center"><div class="prob-num"><span id="failure-prob">0</span><small>%</small></div><div class="prob-label">YOUR LIFT SCORE</div></div></div>
+        <div class="verdict-block"><div class="verdict-eyebrow" id="verdict-eyebrow">FILL THE FORM ABOVE - YOUR SCORE IS WAITING</div><div class="verdict-title" id="verdict-title">COMPLETE THE FORM</div><div class="verdict-sub" id="verdict-sub">Enter your details, recovery information and planned weight, then select CHECK MY LIFT to request an analysis.</div></div>
+        <div class="result-outputs">
+          <div class="out-row"><span><i class="fa-solid fa-check-circle ui-icon" aria-hidden="true"></i>Complete This Lift</span><b id="out-complete">—</b></div>
+          <div class="out-row"><span><i class="fa-solid fa-fire ui-icon" aria-hidden="true"></i>Your Lift Zone</span><b id="out-risk">—</b></div>
+          <div class="out-row highlight"><span><i class="fa-solid fa-trophy ui-icon" aria-hidden="true"></i>Your Winning Weight Today</span><b id="out-safe">—</b></div>
+          <div class="out-row"><span><i class="fa-solid fa-bolt ui-icon" aria-hidden="true"></i>Your Power Today</span><b id="out-conf">—</b></div>
+        </div>
+        <div class="advice-box" id="advice-box"><b>Your Coach Says:</b><br><span id="advice-text">Fill the form and hit CHECK MY LIFT - we will tell you your best weight for today.</span></div>
+        <div class="risk-explain" id="risk-explain"><h4><i class="fa-solid fa-magnifying-glass ui-icon" aria-hidden="true"></i>WHY THIS SCORE?</h4><ul id="risk-list"><li>Select Check My Lift to see your personal game plan.</li></ul></div>
+        <div class="recovery-warning" id="recovery-warning" style="display:none"><b><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> SMART MOVE TODAY</b><p>Your body is asking for a lighter day. Go lighter today, recover well, and you will come back stronger tomorrow. That's how PRs are made.</p></div>
+      </div>
+      <div class="result-guide">
+        <h4><i class="fa-solid fa-chart-pie ui-icon" aria-hidden="true"></i>YOUR ZONES - WHAT THEY MEAN</h4>
+        <div class="result-zones">
+          <div class="zone green"><b>70 - 100% · GREEN ZONE</b><span>You are ON FIRE. Warm up well, use good form, go smash your target.</span></div>
+          <div class="zone yellow"><b>50 - 69% · PUSH ZONE</b><span>Good energy! You can lift, just go a little lighter than your max today.</span></div>
+          <div class="zone red"><b>0 - 49% · SMART ZONE</b><span>Smart lifters rest today. Go light, move well, sleep well - tomorrow you come back stronger.</span></div>
+        </div>
+        <div class="result-next"><div><b>WARM UP</b><span>BEFORE HEAVY LIFTS</span></div><div><b>SMALL STEPS</b><span>INCREASE GRADUALLY</span></div><div><b>REST</b><span>WHEN NEEDED</span></div></div>
+        <p class="result-tip"><b>What boosts your score?</b> Good sleep, low soreness, rest days, feeling fresh, and a small jump from your last best. Small wins every day = Big PR soon.</p>
+      </div>
+    </section>
+  </section>
+  <section class="data-section" id="history-section">
+    <div class="section-heading"><div><div class="eyebrow">04 / MY LIFT ANALYSIS</div><h2>MY LIFT ANALYSIS.</h2></div><span class="section-note" id="history-count">0 TESTS SAVED</span></div>
+    <p style="color:#aab8aa;font-size:.9rem;margin:0 0 1rem;line-height:1.5">Every CHECK MY LIFT is saved automatically. Watch your Lift Score and Winning Weight grow - Test 1, Test 2, Test 3... All on one graph.</p>
+    <div class="history-grid">
+      <div class="history-card">
+        <h4><i class="fa-solid fa-chart-line ui-icon"></i> LIFT SCORE OVER TIME - SINGLE GRAPH</h4>
+        <canvas id="history-chart" width="800" height="260" style="width:100%;height:260px"></canvas>
+        <div class="history-legend"><span>● LIFT SCORE</span><span style="color:#ff6b63">● WINNING WEIGHT (kg)</span><span>● TEST NUMBER BELOW</span></div>
+      </div>
+      <div class="history-card small">
+        <h4><i class="fa-solid fa-trophy ui-icon"></i> YOUR BEST SO FAR</h4>
+        <div class="history-best"><b id="hist-best-score">—</b><span>BEST LIFT SCORE</span></div>
+        <div class="history-best"><b id="hist-best-weight">—</b><span>BEST WINNING WEIGHT</span></div>
+        <div class="history-best"><b id="hist-avg-score">—</b><span>AVERAGE SCORE</span></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button type="button" class="card-nav-btn" id="history-export">DOWNLOAD CSV</button>
+          <button type="button" class="card-nav-btn" id="history-clear" style="background:#ff3b30;border-color:#ff3b30">CLEAR ALL</button>
+        </div>
+      </div>
+    </div>
+    <div class="history-table-wrap">
+      <table class="history-table">
+        <thead><tr><th>TEST</th><th>DATE</th><th>LIFT</th><th>LIFT SCORE</th><th>ZONE</th><th>WINNING WEIGHT</th><th>TARGET</th><th>SLEEP</th></tr></thead>
+        <tbody id="history-body"><tr><td colspan="8" style="text-align:center;color:#8a968a;padding:1.2rem">No tests yet - Press CHECK MY LIFT to start your journey!</td></tr></tbody>
+      </table>
+    </div>
+    <p class="panel-footnote">Your history is saved on this device only (browser storage). Clear All deletes it.</p>
+  </section>
+  <section class="data-section">
+    <div class="section-heading"><div><div class="eyebrow">05 / HOW IT WORKS</div><h2>HOW IT WORKS.</h2></div><span class="section-note">SUPER SIMPLE</span></div>
+    <div class="how-works-grid">
+      <div class="how-works-card"><div class="how-icon"><i class="fa-solid fa-dumbbell"></i></div><h4>TELL US HOW YOU FEEL</h4><p>Sleep, soreness, rest, energy + your last best. Takes 30 seconds. Be honest - your body knows.</p></div>
+      <div class="how-works-card"><div class="how-icon"><i class="fa-solid fa-bolt"></i></div><h4>WE CHECK YOUR POWER</h4><p>We look at your sleep, recovery and jump from your last lift, and give you a Lift Score from 0 to 100.</p></div>
+      <div class="how-works-card"><div class="how-icon"><i class="fa-solid fa-trophy"></i></div><h4>YOU LIFT WITH CONFIDENCE</h4><p>You get your Zone + Your Winning Weight Today. No guessing. Just lift smart and feel like a beast.</p></div>
+    </div>
+    <div class="data-grid" style="margin-top:1rem">
+      <article class="data-card"><span>LIFT SCORE</span><strong>0–100</strong><small>Your Lift Score for today</small></article>
+      <article class="data-card"><span>TRAINING ZONE</span><strong>3 ZONES</strong><small>Green, Push or Smart Zone</small></article>
+      <article class="data-card"><span>TODAY'S TARGET</span><strong>WINNING</strong><small>Best weight for today</small></article>
+      <article class="data-card"><span>LONG-TERM AIM</span><strong>NEW PR</strong><small>Small wins = Big PR soon</small></article>
+    </div>
+    <p class="panel-footnote">A score is an estimate, not a safety guarantee or medical advice. Use proper technique and suitable supervision. Stop if you feel pain, dizziness or unwell.</p>
+  </section>
+</main>
+<footer class="site-footer"><span>PR OR HOSPITAL · SHOULD YOU LIFT THIS WEIGHT?</span><span>TRAIN SMART • LIFT SAFE • KNOW YOUR LIMIT</span></footer>
+</div>
+<div id="result-popup" class="popup-overlay">
+  <div class="popup-box big-result-box">
+    <button type="button" class="popup-close" id="popup-close" aria-label="Close result"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <div class="popup-eyebrow">YOUR LIFT SCORE · YOUR RESULT</div>
+    <h2 class="big-result-title" id="popup-title">LET'S GO!</h2>
+    <div class="popup-badge-row"><span class="lift-badge low" id="popup-badge">READY</span><span class="popup-date" id="popup-date">—</span></div>
+    <div class="big-result-gauge">
+      <div class="big-gauge-num"><span id="popup-prob">—</span><small>% LIFT SCORE</small></div>
+      <div class="big-gauge-bar"><div id="popup-bar" style="width:0%"></div></div>
+      <div class="big-gauge-split"><span>COMPLETE THIS LIFT <b id="popup-complete">—</b></span><span>ZONE <b id="popup-risk">—</b></span></div>
+    </div>
+    <div class="popup-outputs">
+      <div class="p-out"><span>Complete This Lift</span><b id="popup-complete-2">—</b></div>
+      <div class="p-out"><span>Your Lift Zone</span><b id="popup-risk-2">—</b></div>
+      <div class="p-out highlight"><span>Your Winning Weight Today</span><b id="popup-safe">—</b></div>
+      <div class="p-out"><span>Your Power Today</span><b id="popup-conf">—</b></div>
+      <div class="p-out"><span>Your Previous Best → Target</span><b id="popup-pr-target">—</b></div>
+    </div>
+    <div class="popup-inputs">
+      <div><span>SLEEP</span><b id="popup-sleep">—</b></div>
+      <div><span>SORENESS</span><b id="popup-sore">—</b></div>
+      <div><span>REST DAYS</span><b id="popup-rest">—</b></div>
+      <div><span>POWER</span><b id="popup-ready">—</b></div>
+    </div>
+    <div class="popup-why"><h4><i class="fa-solid fa-magnifying-glass ui-icon" aria-hidden="true"></i>WHY THIS SCORE?</h4><ul id="popup-reasons"><li>—</li></ul></div>
+    <p class="popup-sub" id="popup-sub">Run a check to see your result.</p>
+    <div class="big-result-advice" id="popup-advice">You got this! Warm up well and lift smart.</div>
+    <div class="recovery-warning" id="popup-warning" style="display:none"><b><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> SMART MOVE TODAY</b><p>Go lighter today, recover well, and come back stronger tomorrow.</p></div>
+    <button type="button" class="popup-btn" id="popup-ok">LET'S GO · TRY AGAIN</button>
+  </div>
+</div>
+<div id="card-popup" class="popup-overlay"><div class="popup-box big-popup-box">
+  <button type="button" class="popup-close" id="card-popup-close" aria-label="Close gym guide"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  <div class="big-popup-hero"><img id="card-popup-img" src="" alt=""><span class="hero-tag" id="card-popup-tag">GYM GUIDE</span></div>
+  <div class="big-popup-content" id="card-popup-content">
+    <div class="popup-eyebrow">GYM GUIDE · TRAINING INFORMATION</div>
+    <h2 id="card-popup-title">HEAVY LIFT <span>GUIDE</span></h2>
+    <p class="big-popup-intro" id="card-popup-intro">...</p>
+    <div class="mini-stats" id="card-popup-stats"></div>
+    <div class="info-grid" id="card-popup-grid"></div>
+    <div class="card-nav">
+      <button type="button" class="card-nav-btn" id="card-prev">← PREV</button>
+      <span class="card-counter" id="card-counter">1 / 6</span>
+      <button type="button" class="card-nav-btn next" id="card-next">NEXT →</button>
+    </div>
+    <div class="card-dots" id="card-dots"></div>
+    <div class="swipe-hint">← SWIPE LEFT / RIGHT TO CHANGE GUIDE →</div>
+    <button type="button" class="popup-btn" id="card-popup-ok">GOT IT · CHECK MY LIFT</button>
+  </div>
+</div></div>
+<script>
+/* PR OR HOSPITAL - FULL JS - BARBELL MIRROR FIXED */
+const API_BASE = "http://127.0.0.1:8000";
+const CIRCUMFERENCE = 2 * Math.PI * 82;
+const $ = (id) => document.getElementById(id);
+const slider = $("weight-slider");
+const targetInput = $("target-weight");
+const runButton = $("run-prediction");
+let animatedProb = 0;
+let lastRecovery = { score: 75, verdict: "BEAST MODE", risk: 0 };
+let lastPopupData = null;
+const safe = (id, fn) => { const el = $(id); if (el && fn) fn(el); return el; };
+const liftMap = { squat: "Squat", bench: "Bench", deadlift: "Deadlift" };
+const getNum = (id) => { const v = $(id)?.value; if (v === "" || v === null || v === undefined) return null; const n = Number(v); return Number.isFinite(n) ? n : null; };
+const markEmpty = (id) => { const el = $(id); if (el) { el.style.borderColor = "#ff3b30"; el.style.boxShadow = "0 0 0 3px rgba(255,59,48,.25)"; el.focus(); setTimeout(()=>{ el.style.boxShadow=""; }, 2000); } };
+const clearMark = (id) => { const el = $(id); if (el) { el.style.borderColor = ""; el.style.boxShadow = ""; } };
+function getUserName(){ return ($("user-name")?.value || "").trim(); }
+function getCheckDate(){ const v = $("check-date")?.value; if(!v) return new Date().toLocaleDateString("en-US",{day:"numeric",month:"short"}).toUpperCase(); const d = new Date(v+"T00:00:00"); return d.toLocaleDateString("en-US",{day:"numeric",month:"short"}).toUpperCase(); }
+function autoFillDate(){ const now = new Date(); const localDate = [now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-"); const dateEl = $("check-date"); if (dateEl && !dateEl.value) dateEl.value = localDate; const sessionEl = $("session-date"); if (sessionEl) sessionEl.textContent = now.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}).toUpperCase(); }
+function getNameLine(){ const name = getUserName(); return name ? name.toUpperCase() + " - CHECK ON " + getCheckDate() : "CHECK ON " + getCheckDate(); }
+function updateRecovery(){
+  const sleep=getNum("sleep-hours"), sore=getNum("soreness"), rest=getNum("rest-days"), energy=getNum("energy");
+  if(sleep===null&&sore===null&&rest===null&&energy===null){ lastRecovery={score:0,verdict:"ENTER DETAILS",risk:0}; safe("recovery-score",el=>{el.textContent="—";el.style.color="#fff"}); safe("recovery-verdict",el=>{el.textContent="ENTER DETAILS";el.style.color="#8a968a"}); safe("recovery-risk",el=>{el.textContent="—";el.style.color="#8a968a"}); safe("d-ready",el=>{el.textContent="—";el.style.color="#fff"}); return lastRecovery; }
+  const s=sleep??7, so=sore??5, r=rest??1, e=energy??7;
+  let score=(Math.min(s,9)/9*35)+((10-so)/9*30)+(Math.min(r,3)/3*15)+(e/10*20); score=Math.max(0,Math.min(100,Math.round(score)));
+  const verdict=score>=70?"BEAST MODE":score>=50?"PUSH MODE":"SMART MODE"; lastRecovery={score,verdict,risk:Math.max(0,Math.round(100-score))};
+  const col=score>=70?"#b8ff00":score>=50?"#eab308":"#ff3b30";
+  safe("recovery-score",el=>{el.textContent=score+"/100";el.style.color=col}); safe("recovery-verdict",el=>{el.textContent=verdict;el.style.color=col}); safe("recovery-risk",el=>{el.textContent=score+"% ENERGY";el.style.color=col}); safe("d-ready",el=>{el.textContent=score+"/100";el.style.color=col});
+  return lastRecovery;
+}
+function paintSlider(){ if(!slider) return; const min=Number(slider.min), max=Number(slider.max), value=Number(slider.value); const pct=((value-min)/(max-min))*100; slider.style.background=`linear-gradient(to right, #ff3b30 0%, #ff3b30 ${pct}%, #2b332b ${pct}%, #2b332b 100%)`; }
+function updateWeight(value){
+  const rawWeight=Number(value); const weight=Math.min(1000,Math.max(20,Math.round((Number.isFinite(rawWeight)?rawWeight:20)/2.5)*2.5));
+  if(targetInput) targetInput.value=weight; if(slider) slider.value=Math.min(Number(slider.max),Math.max(Number(slider.min),weight));
+  safe("target-weight-val",el=>el.textContent=weight.toLocaleString(undefined,{maximumFractionDigits:1}));
+  const prior=getNum("prior-success"); safe("intensity-pct",el=>el.textContent=prior!==null&&prior>0?`${(weight/prior*100).toFixed(1)}% OF YOUR LAST BEST`:"ENTER YOUR LAST BEST");
+  safe("d-target",el=>el.textContent=weight+" kg"); safe("d-pr",el=>el.textContent=prior!==null?prior+" kg":"—");
+  safe("d-sleep",el=>el.textContent=getNum("sleep-hours")!==null?getNum("sleep-hours")+" hrs":"—"); safe("d-sore",el=>el.textContent=getNum("soreness")!==null?getNum("soreness")+" / 10":"—"); safe("d-rest",el=>el.textContent=getNum("rest-days")!==null?getNum("rest-days")+" day":"—");
+  renderBarbell(weight); paintSlider();
+}
+/* === BARBELL - FIXED MIRROR LOGIC === */
+function renderBarbell(totalKg){
+  const left=$("left-plates"), right=$("right-plates"); if(!left||!right) return;
+  left.replaceChildren(); right.replaceChildren();
+  let perSide=Math.max(0,(totalKg-20)/2); const perSideStart=perSide;
+  const plates=[25,20,15,10,5,2.5,1.25]; const summary=[]; const ordered=[];
+  for(const kg of plates){ const count=Math.floor((perSide+1e-6)/kg); if(!count) continue; summary.push(`${count}x${kg}`); perSide-=count*kg; for(let i=0;i<count;i++) ordered.push(kg); }
+  ordered.forEach(kg=>{ const p=document.createElement("div"); p.className=`plate plate-${String(kg).replace('.','_')}`; p.textContent=kg; right.appendChild(p); });
+  [...ordered].reverse().forEach(kg=>{ const p=document.createElement("div"); p.className=`plate plate-${String(kg).replace('.','_')}`; p.textContent=kg; left.appendChild(p); });
+  safe("plate-breakdown",el=>el.textContent=summary.length?`${summary.join(" + ")} KG / SIDE`:"20 KG BAR ONLY");
+  safe("plate-per-side",el=>el.textContent=perSideStart.toFixed(1)+" KG"); safe("plate-guide-per-side",el=>el.textContent=perSideStart.toFixed(1)+" KG");
+}
+function setStatus(text,isError=false){ safe("api-status-tag",el=>{el.textContent=text;el.style.color=isError?"#ff6b63":"#b8ff00"}); }
+function setResultState(state,message=""){
+  const card=$("lift-card"); if(card) card.dataset.resultState=state;
+  const badge=$("lift-badge"), title=$("verdict-title"), sub=$("verdict-sub"), eyebrow=$("verdict-eyebrow");
+  if(state==="loading"){ if(badge){badge.textContent="ANALYSING";badge.className="lift-badge pending"} if(title){title.textContent="CHECKING YOUR DETAILS";title.className="verdict-title"} if(sub) sub.textContent="Please wait while the prediction service processes your entries."; if(eyebrow) eyebrow.textContent="PREDICTION IN PROGRESS"; }
+  else if(state==="error"){ if(badge){badge.textContent="UNAVAILABLE";badge.className="lift-badge pending"} if(title){title.textContent="RESULT UNAVAILABLE";title.className="verdict-title danger"} if(sub) sub.textContent=message||"The prediction service could not be reached. Start the backend and try again."; if(eyebrow) eyebrow.textContent="NO PREDICTION WAS GENERATED"; ["out-complete","out-risk","out-safe","out-conf"].forEach(id=>safe(id,el=>el.textContent="—")); safe("advice-text",el=>el.textContent="No result was generated. Check that the backend is running at http://127.0.0.1:8000, then try again."); safe("risk-list",el=>el.innerHTML="<li>The API did not return a valid prediction.</li>"); safe("failure-prob",el=>el.textContent="—"); safe("gauge-arc",el=>{el.style.strokeDashoffset=String(CIRCUMFERENCE);el.style.stroke="#4b554b"}); animatedProb=0; }
+  else if(state==="empty"){ if(badge){badge.textContent="AWAITING DETAILS";badge.className="lift-badge pending"} if(title){title.textContent="COMPLETE THE FORM";title.className="verdict-title"} if(sub) sub.textContent="Enter your details, recovery information and planned weight, then select CHECK MY LIFT to request an analysis."; if(eyebrow) eyebrow.textContent="YOUR RESULT WILL APPEAR HERE"; ["out-complete","out-risk","out-safe","out-conf"].forEach(id=>safe(id,el=>el.textContent="—")); safe("failure-prob",el=>el.textContent="—"); safe("gauge-arc",el=>{el.style.strokeDashoffset=String(CIRCUMFERENCE);el.style.stroke="#4b554b"}); safe("advice-text",el=>el.textContent="Complete the form and request an analysis to see your result."); safe("risk-list",el=>el.innerHTML="<li>Your result will appear here after the prediction service responds.</li>"); animatedProb=0; lastPopupData=null; }
+  else if(state==="result"){ if(card) card.dataset.resultState="result"; }
+}
+function animateGauge(targetPct){
+  const arc=$("gauge-arc"), label=$("failure-prob"); if(!arc||!label) return; const start=animatedProb, startTime=performance.now(), duration=800;
+  function frame(now){ const p=Math.min(1,(now-startTime)/duration); const eased=1-Math.pow(1-p,3); const val=start+(targetPct-start)*eased; animatedProb=val; label.textContent=val.toFixed(0); arc.style.strokeDashoffset=(CIRCUMFERENCE*(1-val/100)).toFixed(2); arc.style.stroke=val>=70?"#b8ff00":val>=50?"#eab308":"#ff3b30"; if(p<1) requestAnimationFrame(frame); }
+  requestAnimationFrame(frame);
+}
+function showPopup(success,advice){
+  const d=lastPopupData; if(!d){ $("result-popup")?.classList.add("show"); return; }
+  const zone=success>=70?"GREEN ZONE":success>=50?"PUSH ZONE":"SMART ZONE";
+  safe("popup-prob",el=>el.textContent=success.toFixed(0));
+  safe("popup-title",el=>{el.textContent=success>=70?"YOU GOT THIS!":success>=50?"ALMOST THERE!":"SMART MOVE!";el.style.color=success>=70?"#b8ff00":success>=50?"#eab308":"#ff3b30"});
+  safe("popup-badge",el=>{el.textContent=zone;el.className="lift-badge "+(success>=70?"low":success>=50?"medium":"high")});
+  safe("popup-date",el=>el.textContent=getCheckDate()+(getUserName()?" - "+getUserName().toUpperCase():""));
+  safe("popup-bar",el=>{el.style.width=success+"%";el.style.background=success>=70?"#b8ff00":success>=50?"#eab308":"#ff3b30"});
+  safe("popup-complete",el=>el.textContent=success.toFixed(0)+"%"); safe("popup-complete-2",el=>el.textContent=success.toFixed(0)+"%");
+  safe("popup-risk",el=>{el.textContent=zone;el.style.color=success>=70?"#b8ff00":success>=50?"#eab308":"#ff3b30"}); safe("popup-risk-2",el=>{el.textContent=zone;el.style.color=success>=70?"#b8ff00":success>=50?"#eab308":"#ff3b30"});
+  safe("popup-safe",el=>el.textContent=d.safeWeight+" kg"); safe("popup-conf",el=>el.textContent=lastRecovery.score+"/100"); safe("popup-pr-target",el=>el.textContent=d.prior+" kg -> "+d.target+" kg");
+  safe("popup-sleep",el=>el.textContent=d.sleep+" hrs"); safe("popup-sore",el=>el.textContent=d.sore+"/10"); safe("popup-rest",el=>el.textContent=d.rest+"d"); safe("popup-ready",el=>el.textContent=lastRecovery.score+"/100");
+  safe("popup-reasons",el=>el.innerHTML=d.reasons.map(r=>`<li>${r}</li>`).join("")); safe("popup-sub",el=>el.textContent=success>=70?"YOU ARE READY - GO SMASH IT":success>=50?"GOOD ENERGY - GO A LITTLE LIGHTER":"GO LIGHT TODAY - COME BACK STRONGER TOMORROW");
+  safe("popup-advice",el=>el.textContent=advice); safe("popup-warning",el=>el.style.display=success<50?"block":"none"); $("result-popup")?.classList.add("show");
+}
+function hidePopup(){ $("result-popup")?.classList.remove("show"); }
+function getHistory(){ try{return JSON.parse(localStorage.getItem("liftHistory")||"[]")}catch(e){return[]} }
+function saveHistoryEntry(entry){ const h=getHistory(); entry.test="TEST "+(h.length+1); h.push(entry); localStorage.setItem("liftHistory",JSON.stringify(h)); renderHistory(); }
+function drawHistoryChart(h){
+  const c=$("history-chart"); if(!c) return; const ctx=c.getContext("2d"); ctx.clearRect(0,0,c.width,c.height);
+  ctx.strokeStyle="rgba(255,255,255,.1)"; ctx.lineWidth=1; for(let i=0;i<=4;i++){const y=20+i*55; ctx.beginPath(); ctx.moveTo(40,y); ctx.lineTo(780,y); ctx.stroke();}
+  ctx.fillStyle="#8a968a"; ctx.font="700 11px JetBrains Mono"; for(let i=0;i<=4;i++){ctx.fillText(String(100-i*25)+"%",2,24+i*55);}
+  if(!h.length){ctx.fillStyle="#8a968a";ctx.font="700 16px Inter";ctx.fillText("No data yet - Do TEST 1",280,130);return;}
+  const maxW=Math.max(...h.map(x=>x.winning),100); const X=i=>h.length===1?400:50+i*(700/(h.length-1));
+  ctx.strokeStyle="#ff3b30"; ctx.lineWidth=2; ctx.beginPath(); h.forEach((r,i)=>{const x=X(i),y=240-(r.winning/maxW)*210; i?ctx.lineTo(x,y):ctx.moveTo(x,y)}); ctx.stroke();
+  ctx.strokeStyle="#b8ff00"; ctx.lineWidth=3; ctx.beginPath(); h.forEach((r,i)=>{const x=X(i),y=240-(r.score/100)*210; i?ctx.lineTo(x,y):ctx.moveTo(x,y)}); ctx.stroke();
+  h.forEach((r,i)=>{const x=X(i),y=240-(r.score/100)*210; ctx.fillStyle="#b8ff00"; ctx.beginPath(); ctx.arc(x,y,5,0,7); ctx.fill(); ctx.strokeStyle="#000"; ctx.lineWidth=2; ctx.stroke(); ctx.fillStyle="#fff"; ctx.font="700 11px JetBrains Mono"; ctx.fillText(r.score+"%",x-14,y-10); ctx.fillText(r.test,x-20,255);});
+}
+function renderHistory(){
+  const h=getHistory(); const body=$("history-body"); if(!body) return; safe("history-count",el=>el.textContent=h.length+" TESTS SAVED");
+  if(!h.length){ body.innerHTML='<tr><td colspan="8" style="text-align:center;color:#8a968a;padding:1.2rem">No tests yet - Press CHECK MY LIFT to start your journey!</td></tr>'; safe("hist-best-score",el=>el.textContent="—"); safe("hist-best-weight",el=>el.textContent="—"); safe("hist-avg-score",el=>el.textContent="—"); }
+  else{ body.innerHTML=h.slice().reverse().map(r=>`<tr><td><b style="color:#b8ff00">${r.test}</b></td><td>${r.date}</td><td>${r.lift}</td><td><b>${r.score}%</b></td><td>${r.zone}</td><td><b style="color:#b8ff00">${r.winning} kg</b></td><td>${r.target} kg</td><td>${r.sleep} hrs</td></tr>`).join(""); const best=Math.max(...h.map(x=>x.score)), bestW=Math.max(...h.map(x=>x.winning)), avg=Math.round(h.reduce((a,x)=>a+x.score,0)/h.length); safe("hist-best-score",el=>el.textContent=best+"%"); safe("hist-best-weight",el=>el.textContent=bestW+" kg"); safe("hist-avg-score",el=>el.textContent=avg+"%"); }
+  drawHistoryChart(h);
+}
+function renderResult(data){
+  const prob01=Number(data.fail_probability); if(!Number.isFinite(prob01)) throw new Error("No score returned"); setResultState("result");
+  const failPct=Math.max(0,Math.min(100,prob01*100)); const success=Math.round(100-failPct); const zone=success>=70?"GREEN ZONE":success>=50?"PUSH ZONE":"SMART ZONE";
+  const target=Number(targetInput?.value)||0, prior=getNum("prior-success")??0, sleep=getNum("sleep-hours")??7, sore=getNum("soreness")??5, rest=getNum("rest-days")??1, energy=getNum("energy")??7;
+  let safeWeight=target; if(success<50) safeWeight=Math.round(prior*0.92); else if(success<70) safeWeight=Math.round(target*0.92); else safeWeight=target; if(safeWeight<20) safeWeight=20;
+  const reasons=[]; if(sleep>=7) reasons.push(`Great sleep (${sleep} hrs) - your body is ready`); else if(sleep<6) reasons.push(`Low sleep (${sleep} hrs) - go a little lighter today`);
+  if(sore<=4) reasons.push(`Muscles fresh (${sore}/10) - nice recovery`); else if(sore>=7) reasons.push(`Muscles still sore (${sore}/10) - body needs more recovery`);
+  if(rest>=2) reasons.push(`Well rested (${rest} days) - you are recharged`); else if(rest<1) reasons.push(`No rest day yet - take it easier today`);
+  if(energy>=7) reasons.push(`High energy (${energy}/10) - you feel strong`); else if(energy<5) reasons.push(`Low energy (${energy}/10) - save power for tomorrow`);
+  if(prior>0&&target/prior>1.10) reasons.push(`Big jump: ${((target/prior-1)*100).toFixed(0)}% above your last best - small steps win`); else if(prior>0) reasons.push(`Smart jump from ${prior}kg to ${target}kg - perfect progression`);
+  if(reasons.length===0) reasons.push(`All good: slept well, fresh, smart jump. Let's go!`);
+  lastPopupData={completePct:success,safeWeight,conf:lastRecovery.score,prior,target,sleep,sore,rest,reasons};
+  saveHistoryEntry({date:getCheckDate(),lift:liftMap[$("lift-type")?.value]||"Squat",score:success,zone,winning:safeWeight,target,sleep});
+  animateGauge(success);
+  const title=success>=70?"YOU GOT THIS!":success>=50?"ALMOST THERE!":"SMART MOVE!"; const sub=success>=70?"YOU ARE READY - GO SMASH IT":success>=50?"GOOD ENERGY - GO A LITTLE LIGHTER":"GO LIGHT TODAY - COME BACK STRONGER TOMORROW";
+  const advice=success>=70?`Power ${lastRecovery.score}/100 - ${lastRecovery.verdict}. Your winning weight today is ${safeWeight}kg. Warm up well and go smash it!`:success>=50?`Power ${lastRecovery.score}/100 - ${lastRecovery.verdict}. Your winning weight today is ${safeWeight}kg. Go a little lighter, move clean, and you will PR soon.`:`Power ${lastRecovery.score}/100 - ${lastRecovery.verdict}. Your winning weight today is ${safeWeight}kg. Go light, move well, sleep well - tomorrow you come back stronger. That's how PRs are made.`;
+  safe("d-sleep",el=>el.textContent=sleep+" hrs"); safe("d-sore",el=>el.textContent=sore+" / 10"); safe("d-rest",el=>el.textContent=rest+" day"); safe("d-target",el=>el.textContent=target+" kg"); safe("d-pr",el=>el.textContent=prior+" kg"); safe("d-ready",el=>{el.textContent=lastRecovery.score+"/100";el.style.color=lastRecovery.score>=70?"#b8ff00":lastRecovery.score>=50?"#eab308":"#ff3b30"});
+  safe("out-complete",el=>el.textContent=success+"%"); safe("out-risk",el=>{el.textContent=zone;el.style.color=success>=70?"#b8ff00":success>=50?"#eab308":"#ff3b30"}); safe("out-safe",el=>el.textContent=safeWeight+" kg"); safe("out-conf",el=>el.textContent=lastRecovery.score+"/100");
+  safe("lift-badge",el=>{el.textContent=zone;el.className="lift-badge "+(success>=70?"low":success>=50?"medium":"high")});
+  safe("verdict-eyebrow",el=>el.textContent=getNameLine()+" - POWER "+lastRecovery.score+"/100 - "+lastRecovery.verdict);
+  safe("verdict-title",el=>{el.textContent=title;el.className=`verdict-title ${success>=70?"safe":success>=50?"warn":"danger"}`});
+  safe("verdict-sub",el=>{el.textContent=sub;el.className=`verdict-sub ${success<50?"danger":"safe"}`});
+  safe("advice-text",el=>el.textContent=advice); safe("risk-list",el=>el.innerHTML=reasons.map(r=>`<li>${r}</li>`).join("")); safe("recovery-warning",el=>el.style.display=success<50?"block":"none");
+  setTimeout(()=>showPopup(success,advice),450);
+}
+async function runPrediction(){
+  const age=getNum("age"), bodyweight=getNum("bodyweight"), target=getNum("target-weight"), prior=getNum("prior-success");
+  setResultState("empty"); ["age","bodyweight","prior-success","target-weight"].forEach(clearMark);
+  if(age===null||age<10||age>100){ setStatus("CHECK YOUR AGE",true); safe("verdict-title",el=>el.textContent=age===null?"ENTER YOUR AGE":"CHECK YOUR AGE"); safe("verdict-sub",el=>el.textContent="Enter an age between 10 and 100."); markEmpty("age"); return; }
+  if(bodyweight===null||bodyweight<20||bodyweight>300){ setStatus("CHECK BODYWEIGHT",true); safe("verdict-title",el=>el.textContent="CHECK BODYWEIGHT"); safe("verdict-sub",el=>el.textContent="Enter your bodyweight between 20 and 300 kg."); markEmpty("bodyweight"); return; }
+  if(target===null||target<20||target>1000){ setStatus("CHECK TARGET WEIGHT",true); safe("verdict-title",el=>el.textContent="CHECK TARGET WEIGHT"); safe("verdict-sub",el=>el.textContent="The bar weighs 20 kg. Choose a total weight from 20 to 1000 kg."); markEmpty("target-weight"); return; }
+  if(prior===null||prior<0||prior>1000){ setStatus("CHECK PREVIOUS BEST",true); safe("verdict-title",el=>el.textContent="ENTER YOUR LAST BEST"); safe("verdict-sub",el=>el.textContent="Enter your previous successful weight from 0 to 1000 kg."); markEmpty("prior-success"); return; }
+  updateRecovery(); if(runButton){runButton.disabled=true;runButton.textContent="ANALYSING..."} setResultState("loading"); setStatus("CHECKING YOUR LIFT...");
+  const controller=new AbortController(); const timeoutId=setTimeout(()=>controller.abort(),12000);
+  try{
+    const response=await fetch(`${API_BASE}/predict`,{method:"POST",headers:{"Content-Type":"application/json"},signal:controller.signal,body:JSON.stringify({Age:age,BodyweightKg:bodyweight,Sex:$("sex")?.value||"M",Event:"SBD",Equipment:$("equipment")?.value||"Raw",lift_type:liftMap[$("lift-type")?.value]||"Squat",attempt_number:Number($("attempt-number")?.value)||1,target_weight_kg:target,prior_successful_weight_kg:prior,sleep_hours:getNum("sleep-hours")??7,soreness:getNum("soreness")??5,rest_days:getNum("rest-days")??1,energy:getNum("energy")??7})});
+    const data=await response.json().catch(()=>({})); if(!response.ok){ const detail=typeof data.detail==="string"?data.detail:`API error ${response.status}`; throw new Error(detail); }
+    renderResult(data); setStatus("PREDICTION RECEIVED");
+  }catch(error){ const message=error.name==="AbortError"?"The prediction service took too long to respond. Check the backend and try again.":(error.message||"Could not connect to the prediction service. Start the backend and try again."); setResultState("error",message); setStatus("BACKEND UNAVAILABLE",true); }
+  finally{ clearTimeout(timeoutId); if(runButton){runButton.disabled=false;runButton.innerHTML='CHECK MY LIFT <span>-&gt;</span>';} }
+}
+const CARD_DATA={
+  heavy:{title:"HEAVY LIFT",tag:"MAX ATTEMPT · 90-100%",intro:"Heavy lifting means working with a very high percentage of your personal record. It can build strength, but it also places high demands on your muscles, joints and technique. Attempt it only with suitable preparation and supervision.",stats:[["90-100%","INTENSITY"],["1-3 REPS","PER SET"],["3-5 MIN","REST BETWEEN SETS"]],cards:[{h:"ADVANTAGES",list:["Develops maximum strength","Tests your current strength level","Can build confidence when properly planned","Helps track training progress"]},{h:"FOOD AND FUEL",list:["Include protein-rich foods in your daily meals","Eat a familiar carbohydrate meal before training","Drink water regularly","Have a balanced meal after training"]},{h:"RECOVERY",list:["Aim for 7-9 hours of sleep","Warm up gradually before heavy sets","Use a suitable cool-down routine","Allow enough recovery before another heavy session"]},{h:"WHEN TO SKIP",list:["Very poor sleep or unusual fatigue","Severe soreness","Sharp pain or joint pain","Dizziness or feeling unwell"],red:true},{h:"HOW TO APPROACH IT",text:"Warm up with lighter weights and gradually increase the load. Use a spotter and safety bars where appropriate. Stop if your technique breaks down or you feel pain. Do not force a repetition.",full:true}]},
+  noexcuses:{title:"NO EXCUSES",tag:"DISCIPLINE · CONSISTENCY",intro:"Consistency does not mean training through injury. It means building a sustainable routine and adjusting the session to match how you feel. A lighter session or rest day can be the right decision.",stats:[["CONSISTENCY","TRAINING HABIT"],["30-60 MIN","SESSION EXAMPLE"],["RECOVERY","PART OF TRAINING"]],cards:[{h:"ADVANTAGES",list:["Builds a regular training habit","Small improvements add up over time","Can support mood and general fitness","Helps maintain long-term progress"]},{h:"FOOD AND FUEL",list:["Avoid training when you feel faint or unwell","Choose a familiar snack before training if needed","Include dal, eggs, chicken, paneer or other protein foods","Eat balanced meals and stay hydrated"]},{h:"RECOVERY",list:["Include rest days in your plan","Track sleep and muscle soreness","Use lighter sessions when needed","Increase training volume gradually"]},{h:"SMART CONSISTENCY",list:["Low motivation? Start with an easy warm-up","Sore muscles? Reduce intensity if appropriate","Injured? Stop and seek qualified advice","Busy day? Choose a shorter, manageable session"],red:true},{h:"TODAY'S PLAN",text:"Choose your session based on your recovery, experience and training plan. If you feel unusually tired, dizzy or in pain, do not force a workout. Rest is part of progress.",full:true}]},
+  prmode:{title:"PR MODE",tag:"PERSONAL RECORD",intro:"PR means Personal Record: your heaviest successful lift under the conditions you track. A PR attempt should be planned, not rushed. Small increases are generally more manageable than sudden large jumps.",stats:[["SMALL STEPS","LOAD INCREASE"],["ONE REP","COMMON PR TEST"],["PLANNING","BEFORE PR DAY"]],cards:[{h:"WHY TRACK A PR?",list:["Shows progress over time","Sets a new training reference point","Can build confidence when achieved safely","Helps plan future training"]},{h:"FOOD AND FUEL",list:["Eat familiar balanced meals before testing","Include carbohydrates for training energy","Include protein in your daily diet","Stay hydrated"]},{h:"PREPARATION",list:["Avoid exhausting sessions before a planned test","Prioritise sleep","Do not try unfamiliar exercises on test day","Warm up progressively"]},{h:"COMMON PR MISTAKES",list:["Making a very large weight jump","Lifting without appropriate safety support","Trying a maximum lift when unwell","Copying another person's target"],red:true},{h:"HOW THIS TOOL HELPS",text:"Enter your previous best and your planned target. We give you a Lift Score and Winning Weight to help you decide.",full:true}]},
+  beast:{title:"BEAST MODE",tag:"MINDSET + ENERGY",intro:"Good training is not just motivation. It also depends on preparation, technique, food, sleep and recovery. Being focused means knowing when to train hard and when to take it easier.",stats:[["SLEEP","RECOVERY"],["ENERGY","READINESS"],["TECHNIQUE","CONTROL"]],cards:[{h:"BENEFITS OF GOOD PREPARATION",list:["Can improve focus and technique","Helps you follow your training plan","Supports consistent performance","Makes training more enjoyable"]},{h:"FOOD AND FUEL",list:["Eat balanced meals throughout the day","Include carbohydrates for energy","Include protein-rich foods","Drink enough water"]},{h:"RECOVERY",list:["Prioritise consistent sleep","Use light movement when suitable","Take rest days","Avoid increasing intensity too quickly"]},{h:"WHEN TO SWITCH IT OFF",list:["Very low energy or poor sleep","Pain during a movement","Dizziness or feeling faint","Loss of control or unsafe technique"],red:true},{h:"CHECK YOUR READINESS",text:"Use your sleep, soreness, rest and freshness answers as part of a wider decision. If you feel unwell or have pain, do not rely on a score to continue lifting.",full:true}]},
+  deadlift:{title:"DEADLIFT",tag:"FULL BODY LIFT",intro:"The deadlift involves lifting a bar from the floor to a standing position. It uses several muscle groups, including the legs, back, grip and core. Learn the movement with a manageable load before increasing weight.",stats:[["FULL BODY","MUSCLES USED"],["CONTROL","MOVEMENT QUALITY"],["TECHNIQUE","FIRST PRIORITY"]],cards:[{h:"MUSCLES INVOLVED",list:["Glutes and hamstrings","Back and core muscles","Grip and forearms","Quadriceps also contribute"]},{h:"FOOD AND FUEL",list:["Eat balanced meals","Include protein sources such as eggs, dal or paneer","Include carbohydrates for training energy","Stay hydrated"]},{h:"TECHNIQUE CHECK",list:["Keep the bar close to your body","Brace your core before lifting","Maintain a controlled back position","Use a load you can move with control"]},{h:"STOP IF YOU NOTICE",list:["Sharp or sudden back pain","Dizziness or feeling faint","Sudden loss of grip or control","Painful joint symptoms"],red:true},{h:"BASIC MOVEMENT CUES",text:"Set your feet, bring the bar close, brace your trunk and push through the floor. Stand tall without leaning back. Learn the movement from a qualified coach and stop if you feel pain.",full:true}]},
+  squat:{title:"SQUAT",tag:"LOWER BODY LIFT",intro:"The squat is a compound movement that trains the legs, glutes and core. Use a comfortable stance and a range of motion you can control. Technique and suitable safety equipment matter more than lifting the heaviest possible load.",stats:[["LEGS + GLUTES","MAIN MUSCLES"],["CONTROL","MOVEMENT QUALITY"],["SAFETY BARS","HEAVY SETS"]],cards:[{h:"MUSCLES INVOLVED",list:["Quadriceps","Glutes","Hamstrings","Core muscles"]},{h:"FOOD AND FUEL",list:["Eat balanced meals","Include protein-rich foods","Choose carbohydrates for energy","Drink water throughout the day"]},{h:"TECHNIQUE CHECK",list:["Choose a stable foot position","Keep your whole foot supported","Control the descent and ascent","Use a range of motion you can maintain"]},{h:"STOP IF YOU NOTICE",list:["Sharp knee or hip pain","Loss of balance or control","Dizziness or feeling faint","Technique breaking down under load"],red:true},{h:"BASIC MOVEMENT CUES",text:"Set your feet, brace your core, lower under control and stand while keeping balance. Use safety bars and a spotter for heavy attempts. Ask a qualified coach to check your form.",full:true}]}
+};
+const CARD_ORDER=["heavy","noexcuses","prmode","beast","deadlift","squat"]; let currentCardIndex=0;
+function getCardData(key){ return CARD_DATA[key]||null; }
+function renderCardDots(){ const dots=$("card-dots"); if(!dots) return; dots.innerHTML=CARD_ORDER.map((k,i)=>`<span class="card-dot ${i===currentCardIndex?"active":""}" data-i="${i}"></span>`).join(""); dots.querySelectorAll(".card-dot").forEach(d=>{ d.addEventListener("click",(e)=>{e.stopPropagation(); showCardByKey(CARD_ORDER[Number(d.dataset.i)],"");}); }); }
+function showCardByKey(key,dir="next"){ const d=getCardData(key); const popup=$("card-popup"); if(!d||!popup) return; currentCardIndex=CARD_ORDER.indexOf(key); if(currentCardIndex<0) currentCardIndex=0; const cardEl=document.querySelector(`.gym-card[data-card="${key}"]`); const img=cardEl?.querySelector("img"); safe("card-popup-img",el=>{if(img) el.src=img.src}); safe("card-popup-tag",el=>el.textContent=d.tag); safe("card-popup-title",el=>el.innerHTML=d.title+' <span>GUIDE</span>'); safe("card-popup-intro",el=>el.textContent=d.intro); safe("card-popup-stats",el=>el.innerHTML=d.stats.map(s=>`<div class="mini-stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")); safe("card-popup-grid",el=>el.innerHTML=d.cards.map(c=>{ if(c.full) return `<div class="info-card full lime"><h4>${c.h}</h4><p>${c.text}</p></div>`; return `<div class="info-card ${c.red?"red":""}"><h4>${c.h}</h4><ul>${c.list.map(li=>`<li>${li}</li>`).join("")}</ul></div>`; }).join("")); safe("card-counter",el=>el.textContent=(currentCardIndex+1)+" / "+CARD_ORDER.length); renderCardDots(); const content=$("card-popup-content"); if(content){content.classList.remove("slide-in-left","slide-in-right"); void content.offsetWidth; if(dir) content.classList.add(dir==="prev"?"slide-in-right":"slide-in-left");} popup.classList.add("show"); const box=popup.querySelector(".big-popup-box"); if(box) box.scrollTop=0; }
+function openCardPopup(key){ showCardByKey(key,"next"); }
+function nextCard(){ showCardByKey(CARD_ORDER[(currentCardIndex+1)%CARD_ORDER.length],"next"); }
+function prevCard(){ showCardByKey(CARD_ORDER[(currentCardIndex-1+CARD_ORDER.length)%CARD_ORDER.length],"prev"); }
+function closeCardPopup(){ $("card-popup")?.classList.remove("show"); }
+safe("dec-weight",el=>el.addEventListener("click",()=>updateWeight(Math.max(1,Number(targetInput?.value)-2.5))));
+safe("inc-weight",el=>el.addEventListener("click",()=>updateWeight(Math.min(1000,Number(targetInput?.value)+2.5))));
+safe("weight-slider",el=>el.addEventListener("input",()=>updateWeight(el.value)));
+safe("target-weight",el=>el.addEventListener("input",()=>{clearMark("target-weight");updateWeight(el.value)}));
+safe("prior-success",el=>el.addEventListener("input",()=>{clearMark("prior-success");updateWeight(targetInput?.value)}));
+safe("age",el=>el.addEventListener("input",()=>clearMark("age")));
+safe("bodyweight",el=>el.addEventListener("input",()=>clearMark("bodyweight")));
+safe("user-name",el=>el.addEventListener("input",()=>{safe("verdict-eyebrow",e=>e.textContent=getNameLine())}));
+safe("check-date",el=>el.addEventListener("change",()=>{safe("verdict-eyebrow",e=>e.textContent=getNameLine())}));
+safe("run-prediction",el=>el.addEventListener("click",runPrediction));
+safe("popup-close",el=>el.addEventListener("click",hidePopup));
+safe("popup-ok",el=>el.addEventListener("click",hidePopup));
+safe("result-popup",el=>el.addEventListener("click",(e)=>{if(e.target.id==="result-popup") hidePopup()}));
+safe("card-popup-close",el=>el.addEventListener("click",closeCardPopup));
+safe("card-popup-ok",el=>el.addEventListener("click",()=>{closeCardPopup();$("run-prediction")?.scrollIntoView({behavior:"smooth",block:"center"})}));
+safe("card-popup",el=>el.addEventListener("click",(e)=>{if(e.target.id==="card-popup") closeCardPopup()}));
+safe("card-next",el=>el.addEventListener("click",(e)=>{e.stopPropagation();nextCard()}));
+safe("card-prev",el=>el.addEventListener("click",(e)=>{e.stopPropagation();prevCard()}));
+safe("history-clear",el=>el.addEventListener("click",()=>{if(confirm("Clear all your Lift Analysis history?")){localStorage.removeItem("liftHistory");renderHistory()}}));
+safe("history-export",el=>el.addEventListener("click",()=>{const h=getHistory();if(!h.length) return alert("No tests to download yet!");let csv="Test,Date,Lift,Score,Zone,Winning Weight,Target,Sleep\n"+h.map(r=>[r.test,r.date,r.lift,r.score,r.zone,r.winning,r.target,r.sleep].join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="my-lift-analysis.csv";a.click()}));
+document.querySelectorAll(".gym-card").forEach(card=>{ card.style.cursor="pointer"; card.addEventListener("click",()=>openCardPopup(card.dataset.card)); card.addEventListener("keydown",(e)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCardPopup(card.dataset.card)}}); });
+document.addEventListener("keydown",(e)=>{ const cardOpen=$("card-popup")?.classList.contains("show"); const resultOpen=$("result-popup")?.classList.contains("show"); if(cardOpen){ if(e.key==="ArrowRight"){e.preventDefault();nextCard();return} if(e.key==="ArrowLeft"){e.preventDefault();prevCard();return} } if(e.key==="Enter"&&!cardOpen&&!resultOpen) runPrediction(); if(e.key==="Escape"){hidePopup();closeCardPopup()} });
+(function initCardSwipe(){ const popup=$("card-popup"); if(!popup) return; const box=popup.querySelector(".big-popup-box"); if(!box) return; let sx=0,sy=0; box.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true}); box.addEventListener("touchend",e=>{if(!popup.classList.contains("show")) return; const dx=e.changedTouches[0].clientX-sx; const dy=Math.abs(e.changedTouches[0].clientY-sy); if(Math.abs(dx)>60&&dy<80){dx<0?nextCard():prevCard()}},{passive:true}); })();
+["sleep-hours","soreness","rest-days","energy"].forEach(id=>safe(id,el=>el.addEventListener("input",updateRecovery)));
+const resultInputIds=new Set(["user-name","check-date","age","bodyweight","sex","equipment","lift-type","attempt-number","target-weight","prior-success","sleep-hours","soreness","rest-days","energy"]);
+document.addEventListener("input",event=>{ if(resultInputIds.has(event.target?.id)){ setResultState("empty"); setStatus("READY TO CHECK"); } });
+document.addEventListener("change",event=>{ if(resultInputIds.has(event.target?.id)){ setResultState("empty"); setStatus("READY TO CHECK"); } });
+autoFillDate(); updateWeight(100); updateRecovery(); renderHistory(); setResultState("empty"); setStatus("READY");
+console.log("PR-or-Hospital LOADED - Barbell Mirror FIXED");
+</script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+/* PR OR HOSPITAL — responsive integration fixes - FULL COMPLETE - css/styles.css */
+/* USE THIS FILE ONLY FOR BARBELL CSS. DELETE barbell CSS from HTML <style> or it will override this. */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+.data-grid > .data-card {
+  min-width: 0;
+  min-height: 130px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .55rem;
+  overflow-wrap: anywhere;
+}
+.data-card > span {
+  display: block;
+  font-size: .68rem;
+  line-height: 1.35;
+  letter-spacing: .12em;
+}
+.data-card > strong {
+  display: block;
+  font-size: clamp(1.35rem, 2.2vw, 2rem) !important;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+.data-card > small {
+  display: block;
+  color: #aab8aa;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+.lift-card { min-width: 0; }
+.lift-card[data-result-state="loading"] {
+  border-color: rgba(184,255,0,.55);
+  box-shadow: 0 0 0 1px rgba(184,255,0,.12), 0 0 28px rgba(184,255,0,.07);
+}
+.lift-card[data-result-state="error"] {
+  border-color: rgba(255,59,48,.55);
+}
+.lift-badge.pending {
+  background: rgba(255,255,255,.08);
+  color: #d7ded7;
+  border: 1px solid rgba(255,255,255,.14);
+}
+.verdict-title { overflow-wrap: anywhere; }
+.verdict-sub { max-width: 62ch; margin-inline: auto; line-height: 1.65; }
+.diag-grid > div, .out-row, .result-guide, .how-works-card, .data-card {
+  min-width: 0;
+}
+.how-works-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+.how-works-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: .45rem;
+  padding: 1.35rem;
+}
+.how-works-card p { line-height: 1.65; }
+.section-heading { min-width: 0; }
+@media (max-width: 1000px) {
+  .data-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .data-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .data-grid > .data-card { min-height: 118px; padding: .9rem; }
+  .how-works-grid { grid-template-columns: 1fr; }
+  .how-works-card { text-align: left; align-items: flex-start; }
+  .how-icon { margin-left: 0 !important; }
+  .panel-header { flex-wrap: wrap; gap: .5rem; }
+  .panel-sub { max-width: 100%; text-align: right; }
+}
+@media (max-width: 380px) {
+  .data-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   BARBELL - CORRECTED - KEEP row-reverse ONLY HERE, NOT IN JS
+   LEFT = row-reverse + flex-start = packs to RIGHT (near BAR)
+   RIGHT = row + flex-start = packs to LEFT (near BAR)
+   So BIG plate is always near BAR on both sides.
+   ============================================================ */
+.barbell-wrap {
+  background: #0a0d0a !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 14px !important;
+  padding: 1.1rem .8rem .8rem !important;
+  margin: 1rem 1.2rem 0 !important;
+  overflow: hidden !important;
+}
+.barbell-visual {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 92px !important;
+  height: 92px !important;
+  gap: 0 !important;
+  width: 100% !important;
+}
+.barbell-side {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  height: 92px !important;
+  min-width: 0 !important;
+  flex: 1 1 0 !important;
+  justify-content: flex-start !important;
+}
+.barbell-side.left, #left-plates { flex-direction: row-reverse !important; }
+.barbell-side.right, #right-plates { flex-direction: row !important; }
+.barbell-bar {
+  width: 100px !important;
+  height: 10px !important;
+  background: linear-gradient(180deg, #eee, #888) !important;
+  border-radius: 0 !important;
+  flex: 0 0 100px !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+.plate {
+  width: 14px !important;
+  border-radius: 4px !important;
+  display: grid !important;
+  place-items: center !important;
+  font: 800 .6rem 'JetBrains Mono', monospace !important;
+  color: #fff !important;
+  flex: 0 0 14px !important;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.3) !important;
+  border: 0 !important;
+}
+.plate-25 { height: 88px !important; background: #ff3b30 !important; }
+.plate-20 { height: 78px !important; background: #2563eb !important; }
+.plate-15 { height: 68px !important; background: #eab308 !important; color: #000 !important; }
+.plate-10 { height: 58px !important; background: #16a34a !important; }
+.plate-5 { height: 48px !important; background: #fff !important; color: #000 !important; }
+.plate-2_5 { height: 40px !important; background: #a855f7 !important; }
+.plate-1_25 { height: 32px !important; background: #64748b !important; }
+.barbell-count {
+  text-align: center !important;
+  font: 700 .6rem 'JetBrains Mono', monospace !important;
+  letter-spacing: .12em !important;
+  color: #8a968a !important;
+  margin-top: .3rem !important;
+}
+.target-row { display: flex !important; gap: .7rem !important; align-items: center !important; margin-top: .8rem !important; }
+.target-row .lime-slider { flex: 1 !important; }
+.target-row .target-number { width: 92px !important; flex-shrink: 0 !important; }
+.target-hint { font-size: .75rem !important; color: #8a968a !important; margin: .4rem 0 0 !important; }
+.bar-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: .5rem !important;
+  font: 700 .6rem 'JetBrains Mono', monospace !important;
+  letter-spacing: .08em !important;
+  color: #8a968a !important;
+  margin: .7rem 0 0 !important;
+}
+@media (max-width: 640px) {
+  .barbell-bar { width: 54px !important; flex-basis: 54px !important; }
+  .barbell-side { gap: 2px !important; }
+  .plate { width: 10px !important; flex-basis: 10px !important; font-size: .48rem !important; }
+}
+
+/* Typography and card refinements adapted from the supplied refined frontend */
+:root { --line: rgba(255,255,255,.12); }
+body { font-family: Inter, system-ui, sans-serif; letter-spacing: -.012em; }
+p { line-height: 1.65; }
+.panel-title { font-family: Anton, Impact, sans-serif; letter-spacing: .035em; }
+.panel-sub, .eyebrow, .meta-label, .section-note { letter-spacing: .12em; }
+.panel-footnote { font-size: .82rem; line-height: 1.65; }
+.how-works-card {
+  position: relative;
+  min-width: 0;
+  padding: 1.25rem 1.2rem 1.35rem;
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.how-works-card:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--lime);
+}
+.how-works-card .how-icon {
+  width: 42px !important;
+  height: 42px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 auto .75rem !important;
+  background: rgba(184,255,0,.1) !important;
+  border: 1px solid rgba(184,255,0,.24) !important;
+  border-radius: 11px !important;
+  color: var(--lime) !important;
+  font-size: 1.05rem !important;
+}
+.how-works-card h4 { margin: 0 0 .5rem; letter-spacing: .025em; }
+.how-works-card p { margin: 0; color: #c2cbc2; font-size: .88rem; line-height: 1.65; }
+.panel-bar .barbell-count { color: #e4e9e4; font-size: .66rem; letter-spacing: .08em; }
+.panel-bar .bar-footer { font-size: .63rem; }
+.panel-bar .plate-guide h4 { font-size: .68rem; }
+.panel-bar .plate-tip { line-height: 1.6; }
+#plate-guide-per-side { font-family: 'JetBrains Mono', monospace; }
+
+@media (max-width: 900px) {
+  .how-works-grid { grid-template-columns: 1fr; }
+  .how-works-card { padding: 1.1rem; }
+}
+
+/* ============================================================
+   04 / MY LIFT ANALYSIS - SINGLE GRAPH + HISTORY TABLE
+   ============================================================ */
+#history-section { scroll-margin-top: 20px; }
+.history-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+.history-card {
+  min-width: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+  border-radius: 16px;
+  padding: 1.1rem;
+  overflow: hidden;
+}
+.history-card h4 {
+  margin: 0 0 .8rem;
+  font: 800 .65rem 'JetBrains Mono', monospace;
+  letter-spacing: .12em;
+  color: #b8ff00;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.history-card.small {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#history-chart {
+  width: 100% !important;
+  height: 260px !important;
+  display: block;
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+}
+.history-legend {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  font: 700 .6rem 'JetBrains Mono', monospace;
+  letter-spacing: .06em;
+  color: #8a968a;
+  margin-top: .7rem;
+}
+.history-legend span:first-child { color: #b8ff00; }
+.history-legend span:nth-child(2) { color: #ff6b63; }
+.history-best { margin-bottom: .7rem; }
+.history-best b {
+  display: block;
+  font: 800 1.6rem 'JetBrains Mono', monospace;
+  line-height: 1.1;
+  color: #fff;
+}
+.history-best span {
+  font: 700 .55rem 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+  color: #8a968a;
+}
+#history-export, #history-clear { cursor: pointer; }
+.history-table-wrap {
+  overflow-x: auto;
+  background: rgba(0,0,0,.25);
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+  border-radius: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+  min-width: 680px;
+}
+.history-table thead th {
+  font: 800 .6rem 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+  color: #8a968a;
+  text-align: left;
+  padding: .8rem;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  white-space: nowrap;
+  background: rgba(255,255,255,.03);
+}
+.history-table tbody td {
+  padding: .7rem .8rem;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  color: #d8e0d8;
+  white-space: nowrap;
+}
+.history-table tbody tr:last-child td { border-bottom: 0; }
+.history-table tbody tr:hover td { background: rgba(184,255,0,.04); }
+
+/* ============================================================
+   05 / HOW IT WORKS - KEEP 3 CARDS + 4 STATS
+   ============================================================ */
+.how-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: stretch;
+}
+.how-works-card:nth-child(2):before { background: #ff3b30; }
+.how-works-card:nth-child(3):before { background: #eab308; }
+.how-works-card:nth-child(2) .how-icon {
+  color: #ff3b30 !important;
+  background: rgba(255,59,48,.12) !important;
+  border-color: rgba(255,59,48,.4) !important;
+}
+.how-works-card:nth-child(3) .how-icon {
+  color: #eab308 !important;
+  background: rgba(234,179,8,.12) !important;
+  border-color: rgba(234,179,8,.4) !important;
+}
+
+@media (max-width: 800px) {
+  .history-grid { grid-template-columns: 1fr; }
+  #history-chart { height: 220px !important; }
+}
+@media (max-width: 640px) {
+  .history-card { padding: .9rem; }
+  .history-best b { font-size: 1.35rem; }
+  .how-works-grid { grid-template-columns: 1fr !important; }
+}

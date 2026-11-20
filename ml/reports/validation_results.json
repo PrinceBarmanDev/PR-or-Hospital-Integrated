@@ -1,0 +1,14 @@
+{
+    "logistic_regression": {
+        "threshold": 0.5500000000000002,
+        "validation_recall": 0.6444675685050295,
+        "validation_precision": 0.4353327085285848,
+        "validation_f1": 0.5196476017340232
+    },
+    "decision_tree": {
+        "threshold": 0.5500000000000002,
+        "validation_recall": 0.627471383975026,
+        "validation_precision": 0.441650390625,
+        "validation_f1": 0.5184123799971343
+    }
+}

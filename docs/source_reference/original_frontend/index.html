@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PR OR HOSPITAL — Should You Lift This Weight?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+*{box-sizing:border-box}
+:root{--red:#ff3b30;--lime:#b8ff00;--bg:#070908;--card:#111512;--line:rgba(255,255,255,.09)}
+body{background:radial-gradient(900px 500px at 10% 0%,rgba(255,59,48,.18),transparent 60%),radial-gradient(800px 500px at 90% 20%,rgba(184,255,0,.12),transparent 60%),var(--bg)!important;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
+.grid-bg{pointer-events:none!important;opacity:.6}
+.float-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.float-obj{position:absolute;cursor:pointer!important;pointer-events:auto;user-select:none;animation:floatY 6s ease-in-out infinite}
+.float-obj:nth-child(2n){animation-duration:7.5s;animation-delay:-.9s}.float-obj:nth-child(3n){animation-duration:5s;animation-delay:-1.4s}
+.gym-card{width:190px;background:#111;border:1px solid rgba(255,255,255,.16);border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.65);opacity:.9;backdrop-filter:blur(6px);cursor:pointer!important;transition:transform .2s, box-shadow .2s, border-color .2s}
+.gym-card:hover{opacity:1;box-shadow:0 20px 50px rgba(255,59,48,.55);border-color:var(--lime);transform:scale(1.05)!important}
+.gym-card:active{transform:scale(.96)!important}
+.gym-card img{width:100%;height:125px;object-fit:cover;display:block;pointer-events:none}
+.gym-card.small{width:145px}.gym-card.small img{height:95px}
+.gym-card span{display:block;padding:.6rem;text-align:center;font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.18em;color:#ff6b63;background:#0c0e0c}
+.gym-card .click-hint{display:block;padding:0 0 .5rem;text-align:center;font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime);background:#0c0e0c;opacity:0;transition:.2s}
+.gym-card:hover .click-hint{opacity:1}
+@keyframes floatY{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(2deg)}}
+.app-shell{position:relative;z-index:1;max-width:1280px!important}
+.hero{border:1px solid var(--line);border-radius:24px!important;background:linear-gradient(135deg,rgba(255,59,48,.14),rgba(255,255,255,.03) 40%,rgba(184,255,0,.08));backdrop-filter:blur(12px);padding:2.2rem!important;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,59,48,.35),transparent 70%);filter:blur(10px)}
+.hero h1{font-size:clamp(3.2rem,8vw,6.2rem)!important;line-height:.85!important;letter-spacing:-.02em;text-shadow:0 10px 40px rgba(255,59,48,.35)}
+.hero h1 .lime{color:var(--lime)!important;text-shadow:0 10px 40px rgba(184,255,0,.35)}
+.hero-sub{font-size:1.05rem!important;color:#c8d0c8!important;max-width:560px;line-height:1.6}
+.hero-warning{display:inline-flex!important;gap:.5rem;align-items:center;background:#ff3b30;color:#fff!important;padding:.55rem 1rem!important;border-radius:99px!important;font-weight:800!important;letter-spacing:.06em;box-shadow:0 10px 30px rgba(255,59,48,.4)}
+.session-date{font-size:2rem!important;color:var(--lime)!important}
+.session-tag{background:rgba(184,255,0,.12)!important;border:1px solid rgba(184,255,0,.35)!important;color:var(--lime)!important;border-radius:99px!important}
+.how-to{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.04);padding:1.4rem 1.6rem;margin:1.2rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-to h3{margin:0 0 1rem;font-family:Anton,sans-serif;font-size:1.4rem;letter-spacing:.02em;grid-column:1/-1}
+.how-step{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.how-step b{display:block;color:var(--lime);font-size:.75rem;letter-spacing:.12em;margin-bottom:.35rem}
+.how-step p{margin:0;color:#c8d0c8;font-size:.9rem;line-height:1.5}
+.bento-grid{gap:1.2rem!important}
+.panel{border-radius:20px!important;border:1px solid var(--line)!important;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))!important;backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.45);overflow:hidden}
+.panel-header{border-bottom:1px solid var(--line)}
+.panel-title .num{background:var(--red);color:#fff;width:34px;height:34px;display:inline-grid;place-items:center;border-radius:10px;font-size:.9rem;box-shadow:0 8px 20px rgba(255,59,48,.4)}
+.panel-sub{color:var(--lime)!important;font-weight:800!important}
+.signal-cell{background:rgba(0,0,0,.25)!important;border:1px solid var(--line)!important;border-radius:14px!important;transition:.2s}
+.signal-cell:hover{border-color:rgba(184,255,0,.5)!important;transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.4)}
+.signal-label{color:#aab8aa!important;font-weight:700!important}
+.signal-label small{display:block;font-weight:400;font-size:.65rem;color:#788278;margin-top:2px;letter-spacing:0}
+.data-input{background:#0a0d0a!important;border:1px solid #2b332b!important;border-radius:10px!important;color:#fff!important;padding:.75rem .8rem!important;font-weight:600}
+.data-input:focus{outline:none;border-color:var(--lime)!important;box-shadow:0 0 0 3px rgba(184,255,0,.15)}
+/* PLACEHOLDER FIX - GREY HINT TEXT */
+.data-input::placeholder,.target-number::placeholder{color:#5a665a!important;font-weight:500!important;font-size:.85rem!important;opacity:1}
+.data-input:focus::placeholder{color:#788278!important}
+.target-number{background:#0a0d0a!important;border:1px solid #2b332b!important;border-radius:10px!important;color:#fff!important;padding:.75rem .8rem!important;font-weight:600;text-align:center}
+.target-number:focus{outline:none;border-color:var(--lime)!important;box-shadow:0 0 0 3px rgba(184,255,0,.15)}
+.recovery-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
+.recovery-chip{flex:1;min-width:110px;background:linear-gradient(180deg,rgba(184,255,0,.12),rgba(0,0,0,.2));border:1px solid rgba(184,255,0,.25);padding:.7rem;border-radius:14px;text-align:center}
+.recovery-chip b{display:block;font:800 1.25rem 'JetBrains Mono',monospace;color:var(--lime)}
+.recovery-chip span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#8a968a}
+.weight-stepper{justify-content:center}
+.target-weight{font-size:3.2rem!important}
+.target-weight small{color:var(--lime)}
+.step-btn{width:52px!important;height:52px!important;border-radius:50%!important;background:var(--red)!important;color:#fff!important;font-size:1.6rem!important;box-shadow:0 10px 25px rgba(255,59,48,.4);transition:.2s}
+.step-btn:hover{transform:scale(1.1)}
+.lime-slider{accent-color:var(--lime)}
+.run-button{width:100%;padding:1.15rem!important;border-radius:14px!important;background:linear-gradient(90deg,#ff3b30,#ff6b35)!important;color:#fff!important;font-size:.95rem!important;letter-spacing:.08em;box-shadow:0 15px 35px rgba(255,59,48,.45);transition:.2s;border:none;cursor:pointer}
+.run-button:hover{transform:translateY(-2px);box-shadow:0 20px 45px rgba(255,59,48,.6)}
+.gauge-wrap{filter:drop-shadow(0 0 25px rgba(255,59,48,.25))}
+.prob-num{font-size:2.8rem!important}
+.verdict-title{font-size:2.1rem!important}
+.advice-box{background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.3);border-radius:14px;padding:.9rem 1rem;margin-top:1rem;font-size:.9rem;line-height:1.5;color:#d8e0d8}
+.advice-box b{color:var(--lime)}
+.data-card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;border:1px solid var(--line)!important;border-radius:16px!important;transition:.2s}
+.data-card:hover{transform:translateY(-4px);border-color:rgba(184,255,0,.4)}
+.data-card strong{font-size:2rem!important;color:#fff}
+.metrics-table th{background:#ff3b30!important;color:#fff!important}
+.metrics-table td{font-weight:600}
+.report-gallery{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:1rem!important;margin-top:1.2rem}
+.report-gallery figure{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:0;background:#0a0d0a;min-height:220px}
+.report-gallery img{width:100%;height:auto;display:block;transition:.3s;background:#fff}
+.report-gallery figure:hover img{transform:scale(1.03)}
+.report-gallery figcaption{padding:.7rem .9rem;font:700 .65rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#c8d0c8;text-align:center;background:#111512}
+.chart-missing{padding:2rem 1rem;text-align:center;color:#ff6b63;font:700 .8rem 'JetBrains Mono',monospace;line-height:1.6}
+.site-footer{border-top:1px solid var(--line);opacity:.8}
+.popup-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem}
+.popup-overlay.show{display:flex;animation:popIn .25s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.popup-box{position:relative;width:100%;max-width:420px;background:linear-gradient(180deg,#1a201a,#111411);border:2px solid #ff3b30;padding:2rem 1.5rem 1.5rem;text-align:center;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.popup-close{position:absolute;top:10px;right:12px;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;z-index:2}
+.popup-eyebrow{font:700 .65rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:#788278}
+.popup-title{font-family:'Anton',sans-serif;font-size:2.6rem;margin:.5rem 0;color:#ff3b30;line-height:1}
+.popup-title.safe{color:#b8ff00}
+.popup-prob{font:700 2.2rem 'JetBrains Mono',monospace}.popup-prob small{font-size:.8rem;color:#788278}
+.popup-sub{color:#aab8aa;font-size:.9rem;margin:1rem 0;line-height:1.5}
+.popup-btn{width:100%;padding:1rem;border:0;border-radius:12px;background:#ff3b30;color:#fff;font:800 .8rem 'JetBrains Mono',monospace;letter-spacing:.08em;cursor:pointer}
+/* BIG CARD POPUP */
+.big-popup-box{max-width:720px!important;max-height:92vh;overflow-y:auto;text-align:left!important;padding:0!important;border-color:var(--lime)!important}
+.big-popup-box::-webkit-scrollbar{width:6px}.big-popup-box::-webkit-scrollbar-thumb{background:#ff3b30;border-radius:99px}
+.big-popup-hero{position:relative}
+.big-popup-hero img{width:100%;height:260px;object-fit:cover;display:block;border-radius:18px 18px 0 0}
+.big-popup-hero .hero-tag{position:absolute;left:16px;bottom:16px;background:#ff3b30;color:#fff;padding:.4rem .9rem;border-radius:99px;font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em}
+.big-popup-content{padding:1.6rem 1.8rem 1.6rem}
+.big-popup-content h2{font-family:Anton,sans-serif;font-size:2.6rem;line-height:.95;margin:.2rem 0 .8rem;color:#fff}
+.big-popup-content h2 span{color:var(--lime)}
+.big-popup-intro{color:#c8d0c8;line-height:1.6;font-size:.95rem;margin:0 0 1.2rem}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem}
+.info-card{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.info-card.full{grid-column:1/-1}
+.info-card h4{margin:0 0 .4rem;font-size:.7rem;letter-spacing:.14em;color:var(--lime);font-family:'JetBrains Mono',monospace}
+.info-card p,.info-card li{margin:0;color:#d8e0d8;font-size:.88rem;line-height:1.6}
+.info-card ul{margin:0;padding-left:1.1rem}
+.info-card li{margin-bottom:.25rem}
+.info-card.red{border-color:rgba(255,59,48,.4);background:rgba(255,59,48,.08)}
+.info-card.red h4{color:#ff6b63}
+.info-card.lime{border-color:rgba(184,255,0,.35);background:rgba(184,255,0,.07)}
+.mini-stats{display:flex;gap:.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.mini-stat{flex:1;min-width:100px;background:#0a0d0a;border:1px solid var(--line);border-radius:12px;padding:.6rem;text-align:center}
+.mini-stat b{display:block;font:800 1.1rem 'JetBrains Mono',monospace;color:var(--lime)}
+.mini-stat span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a}
+/* PLATE GUIDE - 02 */
+.plate-guide{margin:1rem 0 0;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.plate-guide h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.plate-legend{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;margin-bottom:.7rem}
+.plate-item{display:flex;align-items:center;gap:.5rem;font:600 .75rem Inter,sans-serif;color:#d8e0d8}
+.plate-dot{width:18px;height:18px;border-radius:4px;flex-shrink:0;display:grid;place-items:center;font:800 .55rem 'JetBrains Mono',monospace;color:#fff;border:1px solid rgba(0,0,0,.4)}
+.plate-dot.red{background:#ff3b30}.plate-dot.blue{background:#2563eb}.plate-dot.yellow{background:#eab308;color:#000}.plate-dot.green{background:#16a34a}.plate-dot.white{background:#fff;color:#000}.plate-dot.purple{background:#a855f7}
+.plate-info{border-top:1px solid var(--line);padding-top:.6rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;text-align:center}
+.plate-info div b{display:block;font:800 .9rem 'JetBrains Mono',monospace;color:#fff}
+.plate-info div span{font:700 .55rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8a968a}
+.plate-tip{margin:.6rem 0 0;font-size:.75rem;line-height:1.5;color:#aab8aa;background:rgba(184,255,0,.07);border:1px solid rgba(184,255,0,.2);border-radius:10px;padding:.55rem .7rem}
+.plate-tip b{color:var(--lime)}
+/* DIAGNOSTIC - INPUTS + OUTPUTS + RESULT GUIDE - 03 */
+.diag-inputs{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
+.diag-inputs h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.diag-grid div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .5rem;text-align:center}
+.diag-grid div span{display:block;font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#8a968a;margin-bottom:.2rem}
+.diag-grid div b{font:800 .9rem 'JetBrains Mono',monospace;color:#fff}
+.lift-card{border:1px solid var(--line);border-radius:16px;padding:1rem;background:rgba(0,0,0,.15)}
+.lift-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.lift-card-top span:first-child{font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:#8a968a}
+.lift-badge{font:800 .65rem 'JetBrains Mono',monospace;letter-spacing:.08em;padding:.3rem .7rem;border-radius:99px;background:#333;color:#fff}
+.lift-badge.high{background:#ff3b30}.lift-badge.medium{background:#eab308;color:#000}.lift-badge.low{background:#b8ff00;color:#000}
+.result-outputs{margin-top:1rem;display:flex;flex-direction:column;gap:.45rem}
+.out-row{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;font-size:.82rem}
+.out-row span{color:#c8d0c8}.out-row b{font:800 .9rem 'JetBrains Mono',monospace;color:var(--lime)}
+.out-row.highlight{border-color:rgba(184,255,0,.4);background:rgba(184,255,0,.08)}
+.risk-explain{margin-top:1rem;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem}
+.risk-explain h4{margin:0 0 .5rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--lime)}
+.risk-explain ul{margin:0;padding-left:1.1rem;color:#d8e0d8;font-size:.82rem;line-height:1.6}
+.recovery-warning{margin-top:1rem;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.4);border-radius:12px;padding:.8rem 1rem}
+.recovery-warning b{color:#ff6b63;font:800 .7rem 'JetBrains Mono',monospace;letter-spacing:.1em}
+.recovery-warning p{margin:.4rem 0 0;font-size:.82rem;line-height:1.5;color:#ffd6d3}
+.result-guide{margin:1rem 0 0;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.result-guide h4{margin:0 0 .6rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--lime)}
+.result-zones{display:grid;grid-template-columns:1fr;gap:.45rem;margin-bottom:.7rem}
+.zone{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:10px;font-size:.78rem;line-height:1.4}
+.zone b{flex-shrink:0;font:800 .6rem 'JetBrains Mono',monospace;letter-spacing:.08em;padding:.25rem .5rem;border-radius:99px;color:#000;min-width:78px;text-align:center}
+.zone.green{background:rgba(184,255,0,.1);border:1px solid rgba(184,255,0,.3);color:#d8e0d8}.zone.green b{background:var(--lime)}
+.zone.yellow{background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.35);color:#d8e0d8}.zone.yellow b{background:#eab308}
+.zone.red{background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.35);color:#d8e0d8}.zone.red b{background:#ff3b30;color:#fff}
+.result-tip{margin:.6rem 0 0;font-size:.75rem;line-height:1.5;color:#aab8aa;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem}
+.result-tip b{color:#fff}
+.result-next{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.6rem;text-align:center}
+.result-next div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .3rem}
+.result-next div b{display:block;font:800 .85rem 'JetBrains Mono',monospace;color:var(--lime)}
+.result-next div span{font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#8a968a}
+/* BIG RESULT POPUP - SAME 5 OUTPUTS */
+.big-result-box{max-width:580px!important;max-height:92vh;overflow-y:auto;text-align:center!important;padding:1.8rem 1.6rem 1.4rem!important}
+.big-result-box::-webkit-scrollbar{width:6px}.big-result-box::-webkit-scrollbar-thumb{background:#ff3b30;border-radius:99px}
+.big-result-title{font-family:'Anton',sans-serif;font-size:2.8rem;line-height:1;margin:.5rem 0 .4rem}
+.popup-badge-row{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-bottom:1rem}
+.popup-date{font:700 .6rem 'JetBrains Mono',monospace;letter-spacing:.1em;color:#788278}
+.big-result-gauge{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem}
+.big-gauge-num{font:800 3.2rem 'JetBrains Mono',monospace;line-height:1}
+.big-gauge-num small{font-size:.9rem;color:#788278}
+.big-gauge-bar{height:12px;background:#232a23;border-radius:99px;overflow:hidden;margin:.8rem 0 .6rem}
+.big-gauge-bar div{height:100%;border-radius:99px;background:var(--lime);transition:width .6s}
+.big-gauge-split{display:flex;justify-content:space-between;font:700 .65rem 'JetBrains Mono',monospace;letter-spacing:.06em;color:#788278}
+.big-gauge-split b{color:#fff}
+.popup-outputs{margin:1rem 0;display:flex;flex-direction:column;gap:.45rem;text-align:left}
+.p-out{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.65rem .8rem;font-size:.85rem}
+.p-out span{color:#c8d0c8}.p-out b{font:800 .95rem 'JetBrains Mono',monospace;color:var(--lime)}
+.p-out.highlight{border-color:rgba(184,255,0,.45);background:rgba(184,255,0,.08)}
+.popup-inputs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem;margin-bottom:1rem}
+.popup-inputs div{background:#0a0d0a;border:1px solid var(--line);border-radius:10px;padding:.55rem .3rem}
+.popup-inputs div span{display:block;font:700 .52rem 'JetBrains Mono',monospace;letter-spacing:.08em;color:#788278;margin-bottom:.2rem}
+.popup-inputs div b{font:800 .85rem 'JetBrains Mono',monospace;color:#fff}
+.popup-why{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;text-align:left;margin-bottom:.8rem}
+.popup-why h4{margin:0 0 .4rem;font:800 .62rem 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--lime)}
+.popup-why ul{margin:0;padding-left:1.1rem;color:#d8e0d8;font-size:.82rem;line-height:1.6}
+.big-result-advice{background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.3);border-radius:12px;padding:.8rem 1rem;font-size:.88rem;line-height:1.5;color:#d8e0d8;margin-bottom:1rem}
+.gauge-arc{stroke-dasharray:515.22;stroke-dashoffset:515.22}
+@media(max-width:640px){.big-popup-box{max-width:95vw!important}.info-grid{grid-template-columns:1fr}.big-popup-hero img{height:180px}.big-popup-content{padding:1.2rem}.big-popup-content h2{font-size:2rem}.diag-grid{grid-template-columns:1fr 1fr}.popup-inputs{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.gym-card{width:120px;opacity:.45}.gym-card img{height:80px}.gym-card.small{width:100px}.how-to{grid-template-columns:1fr}.report-gallery{grid-template-columns:1fr!important}}
+@media(max-width:560px){.gym-card:nth-child(n+5){display:none}.hero{padding:1.4rem!important}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="float-layer" id="float-layer">
+  <div class="float-obj gym-card" data-card="heavy" style="top:6%;left:2%"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80" alt="Gym"><span>HEAVY LIFT</span><span class="click-hint">👆 CLICK TO LEARN</span></div>
+  <div class="float-obj gym-card" data-card="noexcuses" style="top:14%;right:2%"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80" alt="Dumbbells"><span>NO EXCUSES</span><span class="click-hint">👆 CLICK TO LEARN</span></div>
+  <div class="float-obj gym-card" data-card="prmode" style="top:58%;left:1%"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Training"><span>PR MODE</span><span class="click-hint">👆 CLICK TO LEARN</span></div>
+  <div class="float-obj gym-card" data-card="beast" style="top:68%;right:2%"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&q=80" alt="Workout"><span>BEAST MODE</span><span class="click-hint">👆 CLICK TO LEARN</span></div>
+  <div class="float-obj gym-card small" data-card="deadlift" style="top:42%;left:92%"><img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=400&q=80" alt="Deadlift"><span>DEADLIFT</span><span class="click-hint">👆 CLICK</span></div>
+  <div class="float-obj gym-card small" data-card="squat" style="top:85%;left:6%"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&q=80" alt="Barbell"><span>SQUAT</span><span class="click-hint">👆 CLICK</span></div>
+</div>
+
+<div class="app-shell">
+<header class="hero">
+  <div class="hero-left">
+    <div class="eyebrow"><span>⚡ PR / HOSPITAL · SHOULD YOU LIFT THIS?</span><span class="eyebrow-line"></span></div>
+    <h1>PR OR<br><span class="lime">HOSPITAL.</span></h1>
+    <p class="hero-sub">Enter your body, your last best lift, and how your body feels today. We tell you if today's weight is safe to attempt — or if you should drop it and recover.</p>
+    <div class="hero-warning">🔥 ACADEMIC PROTOTYPE · NOT A MEDICAL TOOL</div>
+  </div>
+  <div class="hero-right">
+    <span class="meta-label">TODAY</span>
+    <div class="session-date" id="session-date">—</div>
+    <div class="session-tag" id="api-status-tag">● CONNECTING...</div>
+  </div>
+</header>
+<div class="how-to">
+  <h3>HOW TO USE IT 👇</h3>
+  <div class="how-step"><b>STEP 1 — TELL US ABOUT YOU</b><p>Fill your age, bodyweight, which lift you are doing, and your last successful weight. Be honest about sleep, soreness and freshness.</p></div>
+  <div class="how-step"><b>STEP 2 — LOAD THE BAR</b><p>Use + / − or slider to set the weight you want to try today. This is your target PR attempt.</p></div>
+  <div class="how-step"><b>STEP 3 — CHECK RESULT</b><p>Press <b>CHECK MY LIFT</b>. Green = Go for it. Yellow = Be careful, drop 5-10kg. Red = Don't attempt today, rest.</p></div>
+</div>
+<main>
+<section class="bento-grid">
+  <section class="panel panel-inputs">
+    <div class="panel-header"><div class="panel-title"><span class="num">01</span> ABOUT YOU</div><span class="panel-sub">YOUR BODY TODAY</span></div>
+    <input type="hidden" id="event" value="SBD">
+    <div class="signals-grid">
+      <label class="signal-cell"><span class="signal-label">AGE <small>How old are you?</small></span><input class="data-input" id="age" type="number" min="10" max="100" placeholder="Enter your age" required></label>
+      <label class="signal-cell"><span class="signal-label">BODYWEIGHT <small>Your weight in KG</small></span><input class="data-input" id="bodyweight" type="number" min="20" max="300" step="0.1" placeholder="e.g. 80" required></label>
+      <label class="signal-cell"><span class="signal-label">SEX</span><select class="data-input" id="sex"><option value="M">Male</option><option value="F">Female</option></select></label>
+      <label class="signal-cell"><span class="signal-label">EQUIPMENT <small>What are you wearing?</small></span><select class="data-input" id="equipment"><option value="Raw">Raw - No wraps</option><option value="Wraps">Wraps</option><option value="Single-ply">Single-ply suit</option><option value="Multi-ply">Multi-ply suit</option><option value="Straps">Straps</option></select></label>
+      <label class="signal-cell"><span class="signal-label">WHICH LIFT? <small>What are you lifting today?</small></span><select class="data-input" id="lift-type"><option value="squat">Squat</option><option value="bench">Bench Press</option><option value="deadlift">Deadlift</option></select></label>
+      <label class="signal-cell"><span class="signal-label">WHICH ATTEMPT? <small>1st = easy, 3rd = max</small></span><select class="data-input" id="attempt-number"><option value="1">Attempt 1 - Opener</option><option value="2" selected>Attempt 2 - Second</option><option value="3">Attempt 3 - Final / PR</option></select></label>
+      <label class="signal-cell"><span class="signal-label">LAST BEST LIFT <small>Heaviest you lifted successfully before</small></span><input class="data-input" id="prior-success" type="number" min="0" max="1000" step="0.5" placeholder="e.g. 100" required></label>
+      <label class="signal-cell"><span class="signal-label">😴 SLEEP <small>How many hours did you sleep last night?</small></span><input class="data-input" id="sleep-hours" type="number" min="0" max="14" step="0.5" placeholder="e.g. 7"></label>
+      <label class="signal-cell"><span class="signal-label">💪 MUSCLE SORENESS <small>1 = No pain, 10 = Very sore</small></span><input class="data-input" id="soreness" type="number" min="1" max="10" step="1" placeholder="1 - 10"></label>
+      <label class="signal-cell"><span class="signal-label">🛌 REST DAYS <small>Days since your last heavy session</small></span><input class="data-input" id="rest-days" type="number" min="0" max="14" step="1" placeholder="e.g. 1"></label>
+      <label class="signal-cell"><span class="signal-label">⚡ HOW FRESH DO YOU FEEL? <small>1 = Dead tired, 10 = Super fresh & ready</small></span><input class="data-input" id="energy" type="number" min="1" max="10" step="1" placeholder="1 - 10"></label>
+    </div>
+    <div class="recovery-row">
+      <div class="recovery-chip"><b id="recovery-score">—</b><span>RECOVERY SCORE</span></div>
+      <div class="recovery-chip"><b id="recovery-verdict">—</b><span>READINESS</span></div>
+      <div class="recovery-chip"><b id="recovery-risk">—</b><span>RECOVERY RISK</span></div>
+    </div>
+    <div class="panel-footnote">Honest answers = correct result. If you slept badly and are very sore, your fail risk goes up.</div>
+  </section>
+  <section class="panel panel-bar">
+    <div class="panel-header"><div class="panel-title"><span class="num">02</span> LOAD THE BAR</div><span class="panel-sub">WEIGHT YOU WANT TO TRY</span></div>
+    <div class="bar-controls-top">
+      <span class="target-eyebrow">WEIGHT YOU WANT TO LIFT TODAY · KG</span>
+      <div class="weight-stepper"><button type="button" class="step-btn" id="dec-weight">−</button><div class="target-weight"><span id="target-weight-val">100</span><small>KG</small></div><button type="button" class="step-btn" id="inc-weight">+</button></div>
+      <input type="range" id="weight-slider" class="lime-slider full-slider" min="20" max="500" step="2.5" value="100" />
+      <input type="number" id="target-weight" class="target-number" min="1" max="1000" step="0.5" placeholder="Enter target weight - e.g. 110">
+    </div>
+    <div class="barbell-stage"><div class="bar-shaft"><div class="bar-sleeve left-sleeve"></div><div class="plates-stack left-plates" id="left-plates"></div><div class="bar-center"></div><div class="plates-stack right-plates" id="right-plates"></div><div class="bar-sleeve right-sleeve"></div></div></div>
+    <div class="bar-footer"><span id="intensity-pct">ENTER YOUR LAST BEST</span><span id="plate-breakdown">PLATE LOADER · KG</span></div>
+    <div class="plate-guide">
+      <h4>🏋️ YOUR BARBELL - WHAT'S ON THE BAR?</h4>
+      <div class="plate-legend">
+        <div class="plate-item"><span class="plate-dot red">25</span> Red Plate = 25 KG</div>
+        <div class="plate-item"><span class="plate-dot blue">20</span> Blue Plate = 20 KG</div>
+        <div class="plate-item"><span class="plate-dot yellow">15</span> Yellow Plate = 15 KG</div>
+        <div class="plate-item"><span class="plate-dot green">10</span> Green Plate = 10 KG</div>
+        <div class="plate-item"><span class="plate-dot white">5</span> White Plate = 5 KG</div>
+        <div class="plate-item"><span class="plate-dot purple">2.5</span> Purple = 2.5 KG</div>
+      </div>
+      <div class="plate-info">
+        <div><b>20 KG</b><span>BAR WEIGHT</span></div>
+        <div><b id="plate-per-side">40.0 KG</b><span>PER SIDE</span></div>
+        <div><b>2.5 KG</b><span>COLLARS</span></div>
+      </div>
+      <p class="plate-tip"><b>How to load:</b> Heaviest plates first (inside), lightest last (outside). Always put collars on. Example: For 100 KG → Bar 20 KG + <b>40 KG per side</b> = 25 + 15 on each side.</p>
+      <p class="plate-tip" style="background:rgba(255,59,48,.08);border-color:rgba(255,59,48,.25)"><b>⚠️ Safety:</b> Never load one side only - bar will tip. Always load both sides equally. If you can't lift bar with collars, ask spotter.</p>
+    </div>
+    <button type="button" class="run-button" id="run-prediction">🚀 CHECK MY LIFT <span>→</span></button>
+    <div class="panel-footnote" style="text-align:center;margin-top:.7rem">Example: Last best 100kg, trying 110kg = 110% - harder, higher risk.</div>
+  </section>
+  <section class="panel panel-diagnostic">
+    <div class="panel-header"><div class="panel-title"><span class="num">03</span> YOUR RESULT</div><span class="panel-sub">SHOULD YOU LIFT IT?</span></div>
+    <div class="diag-inputs">
+      <h4>📋 WHAT WE CHECKED</h4>
+      <div class="diag-grid">
+        <div><span>😴 SLEEP</span><b id="d-sleep">—</b></div>
+        <div><span>💪 SORENESS</span><b id="d-sore">—</b></div>
+        <div><span>🛌 REST DAYS</span><b id="d-rest">—</b></div>
+        <div><span>🎯 TARGET WEIGHT</span><b id="d-target">—</b></div>
+        <div><span>🏆 CURRENT PR</span><b id="d-pr">—</b></div>
+        <div><span>⚡ READINESS</span><b id="d-ready">—</b></div>
+      </div>
+    </div>
+    <div class="lift-card" id="lift-card">
+      <div class="lift-card-top"><span>LIFTING ASSESSMENT</span><span class="lift-badge" id="lift-badge">WAITING</span></div>
+      <div class="gauge-wrap"><svg class="radial-gauge" viewBox="0 0 200 200"><circle class="gauge-track" cx="100" cy="100" r="82"/><circle class="gauge-arc" id="gauge-arc" cx="100" cy="100" r="82" stroke-dasharray="515.22" stroke-dashoffset="515.22"/></svg><div class="gauge-center"><div class="prob-num"><span id="failure-prob">—</span><small>%</small></div><div class="prob-label">FAIL RISK</div></div></div>
+      <div class="verdict-block"><div class="verdict-eyebrow" id="verdict-eyebrow">WAITING FOR YOUR INPUT</div><div class="verdict-title" id="verdict-title">NO RESULT YET</div><div class="verdict-sub" id="verdict-sub">FILL THE FORM AND PRESS CHECK MY LIFT</div></div>
+      <div class="result-outputs">
+        <div class="out-row"><span>✅ Lift Completion</span><b id="out-complete">—</b></div>
+        <div class="out-row"><span>⚠️ Risk Classification</span><b id="out-risk">—</b></div>
+        <div class="out-row highlight"><span>🎯 Recommended Safe Weight</span><b id="out-safe">—</b></div>
+        <div class="out-row"><span>📊 Model Confidence</span><b id="out-conf">—</b></div>
+      </div>
+      <div class="advice-box" id="advice-box"><b>What does this mean?</b><br><span id="advice-text">Green = Go for it • Yellow = Drop 5-10kg • Red = Rest today, try tomorrow.</span></div>
+      <div class="risk-explain" id="risk-explain"><h4>🔍 WHY THIS RISK?</h4><ul id="risk-list"><li>Press CHECK MY LIFT to see why.</li></ul></div>
+      <div class="recovery-warning" id="recovery-warning" style="display:none"><b>⚠️ RECOVERY WARNING</b><p>High-risk assessment. Avoid attempting a personal record based solely on this prediction.</p></div>
+    </div>
+    <div class="result-guide">
+      <h4>📊 HOW TO READ YOUR RESULT?</h4>
+      <div class="result-zones">
+        <div class="zone green"><b>0 - 29% GO</b><span>Safe to attempt. You are fresh, recovered &amp; weight is in your range.</span></div>
+        <div class="zone yellow"><b>30 - 49% CAREFUL</b><span>Risky. Drop 5-10 KG or rest 1 more day. Use spotter.</span></div>
+        <div class="zone red"><b>50%+ DON'T LIFT</b><span>High fail chance. Body tired or weight too big jump.</span></div>
+      </div>
+      <div class="result-next"><div><b>95%+</b><span>SUCCESS = PR!</span></div><div><b>2.5 KG</b><span>SAFE JUMP</span></div><div><b>48 HRS</b><span>REST IF RED</span></div></div>
+      <p class="result-tip"><b>What affects your %?</b> Sleep, soreness, rest days, freshness + jump vs last best. Example: Last best 100 KG → Trying 110 KG = 10% jump = higher fail %.</p>
+    </div>
+    <div style="display:none"><span id="model-name">—</span><span id="model-threshold">—</span><span id="model-class">—</span></div>
+  </section>
+</section>
+<section class="data-section">
+  <div class="section-heading"><div><div class="eyebrow">04 / ABOUT THIS TOOL</div><h2>HOW IT WORKS.</h2></div><span class="section-note">BASED ON REAL LIFTING DATA</span></div>
+  <div class="data-grid">
+    <article class="data-card"><span>LIFTS STUDIED</span><strong id="dataset-rows">500,000</strong><small>Real powerlifting attempts studied</small></article>
+    <article class="data-card"><span>WHAT WE CHECK</span><strong>14</strong><small>Your body + recovery + weight</small></article>
+    <article class="data-card"><span>WHAT WE PREDICT</span><strong>FAIL?</strong><small>Will this attempt succeed or fail?</small></article>
+    <article class="data-card"><span>STATUS</span><strong id="model-file-status">CHECKING</strong><small>System ready?</small></article>
+  </div>
+</section>
+<section class="data-section model-section">
+  <div class="section-heading"><div><div class="eyebrow">05 / HOW GOOD IS IT?</div><h2>OUR ACCURACY CHECK.</h2></div><span class="section-note">TESTED ON PAST LIFTS</span></div>
+  <div class="metrics-wrap"><table class="metrics-table"><thead><tr><th>CHECK</th><th>ACCURACY</th><th>HOW OFTEN IT'S RIGHT?</th></tr></thead><tbody><tr><td>OUR SYSTEM (BALANCED)</td><td id="acc-main">—</td><td>Out of 100 lifts, this many we predict correctly</td></tr><tr><td>OLD SETTING (TOO STRICT)</td><td>24.67%</td><td>Too many false alarms - we fixed this</td></tr></tbody></table></div>
+  <div class="report-gallery">
+    <figure><img src="assets/confusion_matrix_decision_tree.png" alt="Decision Tree Result"><figcaption>DECISION TREE - HOW OFTEN RIGHT / WRONG</figcaption></figure>
+    <figure><img src="assets/confusion_matrix_logistic_regression.png" alt="Logistic Regression Result"><figcaption>LOGISTIC REGRESSION - HOW OFTEN RIGHT / WRONG</figcaption></figure>
+    <figure><img src="assets/outcome_distribution.png" alt="Outcome"><figcaption>HOW MANY LIFTS SUCCEED VS FAIL</figcaption></figure>
+  </div>
+  <p class="panel-footnote warning-note">This is a study tool based on past lifts. It is not a doctor. If you feel pain, stop and rest.</p>
+</section>
+</main>
+<footer class="site-footer"><span>PR OR HOSPITAL · SHOULD YOU LIFT THIS WEIGHT?</span><span>ACADEMIC PROTOTYPE · SITM</span></footer>
+</div>
+
+<!-- BIG RESULT POPUP -->
+<div id="result-popup" class="popup-overlay">
+  <div class="popup-box big-result-box">
+    <button type="button" class="popup-close" id="popup-close">✕</button>
+    <div class="popup-eyebrow">LIFTING ASSESSMENT · YOUR RESULT</div>
+    <h2 class="big-result-title" id="popup-title">NO RESULT</h2>
+    <div class="popup-badge-row"><span class="lift-badge" id="popup-badge">WAITING</span><span class="popup-date" id="popup-date">—</span></div>
+    <div class="big-result-gauge">
+      <div class="big-gauge-num"><span id="popup-prob">—</span><small>% FAIL RISK</small></div>
+      <div class="big-gauge-bar"><div id="popup-bar" style="width:0%"></div></div>
+      <div class="big-gauge-split"><span>✅ COMPLETE <b id="popup-complete">—</b></span><span>⚠️ RISK <b id="popup-risk">—</b></span></div>
+    </div>
+    <div class="popup-outputs">
+      <div class="p-out"><span>✅ Lift Completion</span><b id="popup-complete-2">—</b></div>
+      <div class="p-out"><span>⚠️ Risk Classification</span><b id="popup-risk-2">—</b></div>
+      <div class="p-out highlight"><span>🎯 Recommended Safe Weight</span><b id="popup-safe">—</b></div>
+      <div class="p-out"><span>📊 Model Confidence</span><b id="popup-conf">—</b></div>
+      <div class="p-out"><span>🏆 Your PR → Target</span><b id="popup-pr-target">—</b></div>
+    </div>
+    <div class="popup-inputs">
+      <div><span>😴 SLEEP</span><b id="popup-sleep">—</b></div>
+      <div><span>💪 SORENESS</span><b id="popup-sore">—</b></div>
+      <div><span>🛌 REST</span><b id="popup-rest">—</b></div>
+      <div><span>⚡ READINESS</span><b id="popup-ready">—</b></div>
+    </div>
+    <div class="popup-why"><h4>🔍 WHY THIS RISK?</h4><ul id="popup-reasons"><li>—</li></ul></div>
+    <p class="popup-sub" id="popup-sub">Run a check to see your result.</p>
+    <div class="big-result-advice" id="popup-advice">Green = Go • Yellow = Drop 5-10kg • Red = Rest</div>
+    <div class="recovery-warning" id="popup-warning" style="display:none"><b>⚠️ RECOVERY WARNING</b><p>High-risk assessment. Avoid attempting a personal record based solely on this prediction.</p></div>
+    <button type="button" class="popup-btn" id="popup-ok">GOT IT 💪 TRY AGAIN</button>
+  </div>
+</div>
+
+<!-- BIG CARD POPUP -->
+<div id="card-popup" class="popup-overlay"><div class="popup-box big-popup-box">
+  <button type="button" class="popup-close" id="card-popup-close">✕</button>
+  <div class="big-popup-hero"><img id="card-popup-img" src="" alt=""><span class="hero-tag" id="card-popup-tag">GYM GUIDE</span></div>
+  <div class="big-popup-content">
+    <div class="popup-eyebrow">GYM GUIDE · CLICK TO LEARN</div>
+    <h2 id="card-popup-title">HEAVY LIFT <span>GUIDE</span></h2>
+    <p class="big-popup-intro" id="card-popup-intro">...</p>
+    <div class="mini-stats" id="card-popup-stats"></div>
+    <div class="info-grid" id="card-popup-grid"></div>
+    <button type="button" class="popup-btn" id="card-popup-ok">GOT IT 💪 TRY MY LIFT NOW →</button>
+  </div>
+</div></div>
+
+<script src="js/script.js"></script>
+<script>
+document.getElementById("popup-close").onclick=()=>document.getElementById("result-popup").classList.remove("show");
+document.getElementById("popup-ok").onclick=()=>document.getElementById("result-popup").classList.remove("show");
+document.getElementById("result-popup").onclick=(e)=>{if(e.target.id==="result-popup")e.target.classList.remove("show")};
+const CARD_DATA = {
+  heavy: { title: "HEAVY LIFT", tag: "MAX ATTEMPT · 90-100%", intro: "Heavy Lift means lifting 90-100% of your Personal Record. This is where strength is built - but also where most injuries happen. Only attempt it when your body is fully ready.", stats: [["90-100%", "INTENSITY"], ["1-3 REPS", "PER SET"], ["3-5 MIN", "REST BETWEEN SETS"]], cards: [ {h: "✅ ADVANTAGES", list: ["Builds maximum strength fast", "Tests your real limit", "Boosts confidence & mental toughness", "Shows if your training is working"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["Protein: 1.6-2g per kg bodyweight", "Carbs 2-3 hrs before: rice, oats, banana", "Water: 3-4 litres per day", "After lift: chicken + rice / paneer + roti within 1 hr"]}, {h: "🧘 BODY MAINTENANCE", list: ["Sleep 7-9 hrs night before", "Warm-up 10 mins + 2 light sets", "Foam roll legs & back after", "Rest 48 hrs before next heavy day"]}, {h: "⚠️ WHEN TO SKIP?", list: ["Slept less than 5 hrs", "Soreness 8+/10", "Sharp joint pain", "Felt dizzy last session"], red: true}, {h: "🎯 HOW TO TRY IT SAFELY", text: "Start with 60% x 5 reps → 75% x 3 reps → 90% x 1 rep → Then try your target. Always use spotter + safety bars. If bar speed slows a lot, stop - do not force 2nd rep.", full: true} ] },
+  noexcuses: { title: "NO EXCUSES", tag: "DISCIPLINE · CONSISTENCY", intro: "No Excuses does NOT mean lift injured. It means show up even on low-motivation days. On bad days, do light training instead of skipping fully.", stats: [["5-6 DAYS", "TRAIN / WEEK"], ["30-60 MIN", "PER SESSION"], ["100%", "CONSISTENCY"]], cards: [ {h: "✅ ADVANTAGES", list: ["Habit builds faster than motivation", "Small daily wins = big yearly progress", "Keeps metabolism & mood high", "You never lose momentum"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["Never train empty stomach", "Pre-workout: banana + coffee / oats", "Daily protein: dal, eggs, chicken, paneer", "Avoid junk - it kills recovery"]}, {h: "🧘 BODY MAINTENANCE", list: ["Stretch 5 mins daily", "1 full rest day per week is mandatory", "Track sleep & soreness in this app", "Deload every 4th week - lift 50% lighter"]}, {h: "⚠️ REAL NO-EXCUSES RULE", list: ["Tired? Do light 50% workout", "Sore? Do mobility + walk", "Injured? Rest + doctor, not gym", "Busy? Do 20 min home workout"], red: true}, {h: "🎯 TODAY'S PLAN", text: "If you feel 7+/10 fresh - train heavy. If 4-6/10 - train light. If below 4/10 - walk + stretch only. That is still NO EXCUSES.", full: true} ] },
+  prmode: { title: "PR MODE", tag: "PERSONAL RECORD", intro: "PR = Personal Record. Your heaviest successful lift ever. PR Mode is testing day - you try to beat your old best by 2.5kg - 5kg, not 20kg.", stats: [["+2.5 KG", "SAFE PR JUMP"], ["1 REP", "PR ATTEMPT"], ["110%", "MAX SAFE JUMP"]], cards: [ {h: "✅ ADVANTAGES", list: ["Proves your training worked", "Sets new baseline for next cycle", "Huge confidence boost", "Helps coach plan next program"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["Night before: high carb dinner - rice / pasta", "Morning: oats + banana + eggs", "1 hr before: small carb snack", "Creatine 5g daily if you use it - helps PR"]}, {h: "🧘 BODY MAINTENANCE", list: ["Taper: lift light 2 days before PR", "Sleep 8+ hrs for 2 nights before", "No new exercise on PR day", "Warm-up longer - 15 mins"]}, {h: "⚠️ PR DAY MISTAKES", list: ["Jumping +15kg at once", "No spotter", "Trying PR after bad sleep", "Copying someone else's PR"], red: true}, {h: "🎯 HOW OUR APP HELPS", text: "Enter your Last Best (old PR) + Target weight. Our model tells your fail %. Green = Go for PR. Yellow = Drop 5kg and try. Red = Rest, try PR tomorrow.", full: true} ] },
+  beast: { title: "BEAST MODE", tag: "MINDSET + ENERGY", intro: "Beast Mode is not shouting. It is full focus + full recovery. Beast Mode ON = you are fresh, fed, slept well. Beast Mode OFF = you are tired, be smart and rest.", stats: [["8+ HRS", "SLEEP NEEDED"], ["8-10/10", "ENERGY SCORE"], ["<3/10", "SORENESS"]], cards: [ {h: "✅ ADVANTAGES", list: ["Maximum focus = better form", "More power in every rep", "Less injury risk", "You enjoy training more"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["Protein every meal - 25-35g", "Carbs = fuel for beast mode", "Banana + peanut butter pre-workout", "Water + electrolytes during training"]}, {h: "🧘 BODY MAINTENANCE", list: ["Sleep is #1 beast mode supplement", "Cold shower / walk for recovery", "Massage / foam roll weekly", "No alcohol 24 hrs before heavy day"]}, {h: "⚠️ FAKE BEAST MODE", list: ["Energy drink + no sleep = injury", "Anger lifting = bad form", "Ignoring pain = hospital", "Ego lifting = failed lift"], red: true}, {h: "🎯 CHECK YOUR BEAST MODE", text: "In our app, check Recovery Score. If Recovery = HIGH + Freshness 8+ = Beast Mode ON. If Recovery = LOW = Beast Mode OFF, do light day.", full: true} ] },
+  deadlift: { title: "DEADLIFT", tag: "FULL BODY KING", intro: "Deadlift lifts the bar from floor to standing. It uses legs, back, grip, core - everything. It builds the most strength, but bad form = back injury. Technique first, weight second.", stats: [["FULL BODY", "MUSCLES USED"], ["1-5 REPS", "BEST RANGE"], ["2x / WEEK", "MAX FREQUENCY"]], cards: [ {h: "✅ ADVANTAGES", list: ["Builds back, legs, grip together", "Best for overall strength", "Improves posture", "Burns most calories per lift"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["High protein: eggs, chicken, fish, dal", "Carbs before: rice + banana", "Iron: spinach, red meat for strength", "Water: 500ml during session"]}, {h: "🧘 BODY MAINTENANCE", list: ["Never round your lower back", "Brace core - big breath before pull", "Flat shoes or barefoot", "Rest 72 hrs between heavy deadlifts"]}, {h: "⚠️ STOP IMMEDIATELY IF", list: ["Sharp lower back pain", "Grip fails suddenly", "Dizziness / blackout feeling", "Knee / hip clicks with pain"], red: true}, {h: "🎯 DEADLIFT FORM CHECK", text: "Feet under hips → Hips back → Chest up → Bar close to shins → Push floor away → Stand tall. If you cannot keep back flat, weight is too heavy - drop 10kg.", full: true} ] },
+  squat: { title: "SQUAT", tag: "KING OF LIFTS", intro: "Squat is the king. You sit down with bar on back and stand up. It builds legs, glutes, core and mental toughness. Depth + knee control = safe squat.", stats: [["QUADS + GLUTES", "MAIN MUSCLES"], ["5x5", "BEST BEGINNER SET"], ["90°+", "DEPTH TARGET"]], cards: [ {h: "✅ ADVANTAGES", list: ["Biggest leg & glute builder", "Improves balance & mobility", "Boosts testosterone & strength", "Helps all other lifts"]}, {h: "🍗 FOOD REQUIREMENTS", list: ["Protein: 1.8g/kg for leg growth", "Carbs: oats, rice, sweet potato", "Calcium: milk, curd for bones", "Post-squat: protein shake + banana"]}, {h: "🧘 BODY MAINTENANCE", list: ["Ankle mobility stretch daily", "Warm-up: bodyweight squats x 20", "Knees track over toes, not inward", "Rest 48 hrs between heavy squats"]}, {h: "⚠️ STOP IMMEDIATELY IF", list: ["Knee pain inside joint", "Lower back rounds at bottom", "Heel lifts off floor", "You lean too far forward"], red: true}, {h: "🎯 SQUAT FORM CHECK", text: "Feet shoulder width → Toes slightly out → Chest up → Sit back & down → Thighs parallel → Drive up through heels. Use safety bars always for heavy squat.", full: true} ] }
+};
+const cardPopup=document.getElementById("card-popup");
+document.querySelectorAll(".gym-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    const key=card.dataset.card; const d=CARD_DATA[key]; if(!d) return;
+    const img=card.querySelector("img");
+    document.getElementById("card-popup-img").src=img?img.src:"";
+    document.getElementById("card-popup-tag").textContent=d.tag;
+    document.getElementById("card-popup-title").innerHTML=d.title+' <span>GUIDE</span>';
+    document.getElementById("card-popup-intro").textContent=d.intro;
+    document.getElementById("card-popup-stats").innerHTML=d.stats.map(s=>`<div class="mini-stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("");
+    document.getElementById("card-popup-grid").innerHTML=d.cards.map(c=>{
+      if(c.full) return `<div class="info-card full lime"><h4>${c.h}</h4><p>${c.text}</p></div>`;
+      return `<div class="info-card ${c.red?"red":""}"><h4>${c.h}</h4><ul>${c.list.map(li=>`<li>${li}</li>`).join("")}</ul></div>`;
+    }).join("");
+    cardPopup.classList.add("show");
+    cardPopup.querySelector(".big-popup-box").scrollTop=0;
+  });
+});
+document.getElementById("card-popup-close").onclick=()=>cardPopup.classList.remove("show");
+document.getElementById("card-popup-ok").onclick=()=>{cardPopup.classList.remove("show");document.getElementById("run-prediction")?.scrollIntoView({behavior:"smooth",block:"center"});};
+cardPopup.onclick=(e)=>{if(e.target.id==="card-popup")e.target.classList.remove("show")};
+</script>
+</body>
+</html>
