@@ -1,7 +1,7 @@
 /* ============ PR OR HOSPITAL - CLEAN JS - FINAL - POSITIVE SCORE + SWIPE + ICONS ONLY + 04 ANALYSIS + 05 HOW IT WORKS ============ */
 /* BARBELL RULE - MATCHES YOUR CSS: CSS has LEFT=row-reverse, RIGHT=row */
 /* SO JS MUST APPEND SAME ORDER TO BOTH SIDES. DO NOT REVERSE LEFT IN JS. */
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://pr-or-hospital-integrated.onrender.com/";
 const CIRCUMFERENCE = 2 * Math.PI * 82;
 const $ = (id) => document.getElementById(id);
 const slider = $("weight-slider");
