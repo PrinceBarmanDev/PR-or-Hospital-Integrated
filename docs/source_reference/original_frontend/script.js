@@ -1,5 +1,5 @@
 /* ============ PR OR HOSPITAL - CLEAN JS - FINAL ============ */
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://pr-or-hospital-integrated.onrender.com";
 const CIRCUMFERENCE = 2 * Math.PI * 82;
 const $ = (id) => document.getElementById(id);
 const slider = $("weight-slider");
