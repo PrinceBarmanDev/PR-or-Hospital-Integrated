@@ -541,7 +541,7 @@ button{touch-action:manipulation}
 </div></div>
 <script>
 /* PR OR HOSPITAL - FULL JS - BARBELL MIRROR FIXED */
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://pr-or-hospital-integrated.onrender.com";
 const CIRCUMFERENCE = 2 * Math.PI * 82;
 const $ = (id) => document.getElementById(id);
 const slider = $("weight-slider");
@@ -672,7 +672,7 @@ async function runPrediction(){
   if(target===null||target<20||target>1000){ setStatus("CHECK TARGET WEIGHT",true); safe("verdict-title",el=>el.textContent="CHECK TARGET WEIGHT"); safe("verdict-sub",el=>el.textContent="The bar weighs 20 kg. Choose a total weight from 20 to 1000 kg."); markEmpty("target-weight"); return; }
   if(prior===null||prior<0||prior>1000){ setStatus("CHECK PREVIOUS BEST",true); safe("verdict-title",el=>el.textContent="ENTER YOUR LAST BEST"); safe("verdict-sub",el=>el.textContent="Enter your previous successful weight from 0 to 1000 kg."); markEmpty("prior-success"); return; }
   updateRecovery(); if(runButton){runButton.disabled=true;runButton.textContent="ANALYSING..."} setResultState("loading"); setStatus("CHECKING YOUR LIFT...");
-  const controller=new AbortController(); const timeoutId=setTimeout(()=>controller.abort(),12000);
+  const controller=new AbortController(); const timeoutId=setTimeout(()=>controller.abort(),45000);
   try{
     const response=await fetch(`${API_BASE}/predict`,{method:"POST",headers:{"Content-Type":"application/json"},signal:controller.signal,body:JSON.stringify({Age:age,BodyweightKg:bodyweight,Sex:$("sex")?.value||"M",Event:"SBD",Equipment:$("equipment")?.value||"Raw",lift_type:liftMap[$("lift-type")?.value]||"Squat",attempt_number:Number($("attempt-number")?.value)||1,target_weight_kg:target,prior_successful_weight_kg:prior,sleep_hours:getNum("sleep-hours")??7,soreness:getNum("soreness")??5,rest_days:getNum("rest-days")??1,energy:getNum("energy")??7})});
     const data=await response.json().catch(()=>({})); if(!response.ok){ const detail=typeof data.detail==="string"?data.detail:`API error ${response.status}`; throw new Error(detail); }

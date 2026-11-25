@@ -383,7 +383,7 @@ async function runPrediction() {
   setResultState("loading");
   setStatus("CHECKING YOUR LIFT...");
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 12000);
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
 
   try {
     const response = await fetch(`${API_BASE}/predict`, {
