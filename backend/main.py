@@ -35,7 +35,7 @@ _allowed_origins = [
     origin.strip()
     for origin in os.getenv(
         "CORS_ALLOW_ORIGINS",
-        "https://pr-or-hospital.vercel.app,http://localhost:3000,http://127.0.0.1:3000",
+        "https://pr-or-hospital.vercel.app,https://pr-or-hospital.vercel.app/,http://localhost:3000,http://127.0.0.1:3000",
     ).split(",")
     if origin.strip()
 ]
