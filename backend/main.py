@@ -5,6 +5,7 @@
 # Run: python -m uvicorn main:app --reload --port 8000
 # ============================================================
 import pickle
+import os
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -27,7 +28,24 @@ DATASET_DIR = BASE_DIR / "dataset"
 DEFAULT_THRESHOLD = 0.55  # FIXED: ML best F1 threshold
 
 app = FastAPI(title="PR or Hospital API", version="3.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+# Set CORS_ALLOW_ORIGINS on Render to your Vercel URL, e.g.
+# https://pr-or-hospital.vercel.app
+_allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ALLOW_ORIGINS",
+        "https://pr-or-hospital.vercel.app,http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",")
+    if origin.strip()
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_allowed_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 class PredictRequest(BaseModel):
     Age: float = Field(..., ge=10, le=100)
@@ -149,12 +167,14 @@ def load_or_train():
             print(f"📊 After cleaning: {len(df)} rows")
             # NO FAKE Failed creation - use REAL label from ml/data_cleaning.py
             if "Failed" not in df.columns:
-                print("❌ No Failed column found - check ml/data_cleaning.py output")
+                # This repository's bundled CSV has no Failed label. Do not
+                # stop startup here: fall through and load the committed .pkl models.
+                print("⚠️ CSV has no 'Failed' label; skipping training and trying saved models.")
+            else:
+                print(f"📊 REAL Fail rate: {df['Failed'].mean()*100:.1f}%")
+                print("📊 Training Logistic + Tree from REAL CSV...")
+                train_from_df(df)
                 return
-            print(f"📊 REAL Fail rate: {df['Failed'].mean()*100:.1f}%")
-            print("📊 Training Logistic + Tree from REAL CSV...")
-            train_from_df(df)
-            return
         except Exception as e:
             print(f"⚠️ CSV training failed: {e}")
             import traceback; traceback.print_exc()
@@ -307,5 +327,5 @@ def predict(req: PredictRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "8000")))
     
